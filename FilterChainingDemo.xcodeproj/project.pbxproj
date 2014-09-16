@@ -13,6 +13,7 @@
 		BEB19D3519C8CAA500191C16 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3419C8CAA500191C16 /* Images.xcassets */; };
 		BEB19D3819C8CAA500191C16 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3619C8CAA500191C16 /* LaunchScreen.xib */; };
 		BEB19D4419C8CAA500191C16 /* FilterChainingDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */; };
+		BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		BEB19D3D19C8CAA500191C16 /* FilterChainingDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterChainingDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB19D4219C8CAA500191C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChainingDemoTests.swift; sourceTree = "<group>"; };
+		BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		BEB19D2A19C8CAA500191C16 /* FilterChainingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BEB19D4D19C8CEFE00191C16 /* filtersList */,
 				BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */,
 				BEB19D2F19C8CAA500191C16 /* ViewController.swift */,
 				BEB19D3119C8CAA500191C16 /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				BEB19D4219C8CAA500191C16 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEB19D4D19C8CEFE00191C16 /* filtersList */ = {
+			isa = PBXGroup;
+			children = (
+				BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */,
+			);
+			name = filtersList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			files = (
 				BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */,
 				BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */,
+				BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
