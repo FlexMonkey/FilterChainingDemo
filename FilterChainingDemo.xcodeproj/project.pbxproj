@@ -14,6 +14,7 @@
 		BEB19D3819C8CAA500191C16 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3619C8CAA500191C16 /* LaunchScreen.xib */; };
 		BEB19D4419C8CAA500191C16 /* FilterChainingDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */; };
 		BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */; };
+		BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D5019C8D41400191C16 /* FiltersCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		BEB19D4219C8CAA500191C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChainingDemoTests.swift; sourceTree = "<group>"; };
 		BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCollectionViewCell.swift; sourceTree = "<group>"; };
+		BEB19D5019C8D41400191C16 /* FiltersCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */,
+				BEB19D5019C8D41400191C16 /* FiltersCollectionView.swift */,
 			);
 			name = filtersList;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			files = (
 				BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */,
 				BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */,
+				BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */,
 				BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
