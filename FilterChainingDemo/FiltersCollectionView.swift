@@ -19,9 +19,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         layout.itemSize = CGSize(width: 150, height: 150)
         
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
- 
         collectionView.registerClass(FiltersCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        
         collectionView.backgroundColor = UIColor.lightGrayColor()
         
         super.init(frame: frame)

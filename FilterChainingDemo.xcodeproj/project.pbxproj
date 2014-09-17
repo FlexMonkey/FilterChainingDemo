@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E38F31919C9635A00B86916 /* FilterParameterEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F31819C9635A00B86916 /* FilterParameterEditor.swift */; };
+		3E38F31D19C9651800B86916 /* NumericDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F31B19C9651800B86916 /* NumericDial.swift */; };
+		3E38F31E19C9651800B86916 /* NumericDialTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F31C19C9651800B86916 /* NumericDialTrack.swift */; };
+		3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F32019C96A3D00B86916 /* ImagePreview.swift */; };
 		BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */; };
 		BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2F19C8CAA500191C16 /* ViewController.swift */; };
 		BEB19D3319C8CAA500191C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3119C8CAA500191C16 /* Main.storyboard */; };
@@ -28,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E38F31819C9635A00B86916 /* FilterParameterEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterParameterEditor.swift; sourceTree = "<group>"; };
+		3E38F31B19C9651800B86916 /* NumericDial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericDial.swift; sourceTree = "<group>"; };
+		3E38F31C19C9651800B86916 /* NumericDialTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericDialTrack.swift; sourceTree = "<group>"; };
+		3E38F32019C96A3D00B86916 /* ImagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		BEB19D2819C8CAA500191C16 /* FilterChainingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterChainingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB19D2C19C8CAA500191C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +68,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E38F31719C9633300B86916 /* filterParameterEditor */ = {
+			isa = PBXGroup;
+			children = (
+				3E38F31819C9635A00B86916 /* FilterParameterEditor.swift */,
+			);
+			name = filterParameterEditor;
+			sourceTree = "<group>";
+		};
+		3E38F31A19C964B700B86916 /* numericDial */ = {
+			isa = PBXGroup;
+			children = (
+				3E38F31B19C9651800B86916 /* NumericDial.swift */,
+				3E38F31C19C9651800B86916 /* NumericDialTrack.swift */,
+			);
+			name = numericDial;
+			sourceTree = "<group>";
+		};
+		3E38F31F19C96A1E00B86916 /* imagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				3E38F32019C96A3D00B86916 /* ImagePreview.swift */,
+			);
+			name = imagePreview;
+			sourceTree = "<group>";
+		};
 		BEB19D1F19C8CAA500191C16 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +114,9 @@
 		BEB19D2A19C8CAA500191C16 /* FilterChainingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3E38F31F19C96A1E00B86916 /* imagePreview */,
+				3E38F31A19C964B700B86916 /* numericDial */,
+				3E38F31719C9633300B86916 /* filterParameterEditor */,
 				BEB19D4D19C8CEFE00191C16 /* filtersList */,
 				BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */,
 				BEB19D2F19C8CAA500191C16 /* ViewController.swift */,
@@ -227,9 +263,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */,
+				3E38F31E19C9651800B86916 /* NumericDialTrack.swift in Sources */,
+				3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */,
 				BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */,
 				BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */,
+				3E38F31D19C9651800B86916 /* NumericDial.swift in Sources */,
 				BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */,
+				3E38F31919C9635A00B86916 /* FilterParameterEditor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +463,7 @@
 				BEB19D4919C8CAA500191C16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEB19D4A19C8CAA500191C16 /* Build configuration list for PBXNativeTarget "FilterChainingDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +472,7 @@
 				BEB19D4C19C8CAA500191C16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
