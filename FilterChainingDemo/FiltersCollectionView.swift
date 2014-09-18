@@ -30,6 +30,14 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         addSubview(collectionView)
     }
     
+    var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()
+    {
+        didSet
+        {
+            
+        }
+    }
+    
     var indexPath : NSIndexPath?
     {
         didSet
@@ -48,13 +56,21 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
             
             collectionView.reloadItemsAtIndexPaths(foo)
             
-            // dispatch action
+            sendActionsForControlEvents(.ValueChanged)
+        }
+    }
+    
+    var selectedFilter : UserDefinedFilter!
+    {
+        get
+        {
+            return userDefinedFilters[indexPath!.item]
         }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 10
+        return userDefinedFilters.count
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
@@ -68,7 +84,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         
         cell.backgroundColor = (self.indexPath == indexPath) ? UIColor.blueColor() : UIColor.whiteColor()
         
-        cell.setLabel("yo \(indexPath.item)")
+        cell.userDefinedFilter = userDefinedFilters[indexPath.item]
         
         return cell
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class FiltersCollectionViewCell: UICollectionViewCell
 {
-    var label : UILabel = UILabel(frame: CGRectZero)
+    private var label : UILabel = UILabel(frame: CGRectZero)
     
     override init(frame: CGRect)
     {
@@ -21,9 +21,12 @@ class FiltersCollectionViewCell: UICollectionViewCell
         contentView.addSubview(label)
     }
 
-    func setLabel(value : String)
+    var userDefinedFilter : UserDefinedFilter!
     {
-        label.text = value
+        didSet
+        {
+            label.text = userDefinedFilter.filter.filterName
+        }
     }
     
     required init(coder aDecoder: NSCoder)
