@@ -12,7 +12,15 @@ class FilterParameterEditor: UIControl
 {
     var numericDials = [NumericDial]()
 
-    var numDials : Int = 0
+    var userDefinedFilter : UserDefinedFilter!
+    {
+        didSet
+        {
+            numDials = userDefinedFilter.filter.parameterCount
+        }
+    }
+    
+    private var numDials : Int = 0
     {
         didSet
         {
@@ -24,8 +32,11 @@ class FilterParameterEditor: UIControl
     {
         for dial in numericDials
         {
+            dial.removeTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
+            
             dial.removeFromSuperview()
         }
+        
         numericDials = [NumericDial]()
         
         
@@ -33,7 +44,10 @@ class FilterParameterEditor: UIControl
         {
             let dial = NumericDial(frame: CGRectZero)
             
-            // dial.addTarget(self, action: "sliderChangeHandler:", forControlEvents: .ValueChanged)
+            dial.currentValue = userDefinedFilter.values[i]
+            dial.title = userDefinedFilter.filter.parameterNames[i]
+            
+            dial.addTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
             
             numericDials.append(dial)
             
@@ -41,6 +55,19 @@ class FilterParameterEditor: UIControl
         }
         
         setNeedsLayout()
+    }
+    
+    func dialChangeHandler(numericDial : NumericDial)
+    {
+        for (i : Int, dial : NumericDial) in enumerate(numericDials)
+        {
+            if dial == numericDial
+            {                
+                userDefinedFilter.values[i] = dial.currentValue
+            }
+        }
+        
+        sendActionsForControlEvents(.ValueChanged)
     }
     
     override func layoutSubviews()

@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController
 {
-    let filters = [Filter(filterName: "Blur", parameterCount: 1), Filter(filterName: "Brightness & Contrast", parameterCount: 2)]
+    let filters = [Filter(filterName: "Blur", parameterCount: 1, parameterNames : ["Amount"]),
+        Filter(filterName: "Brightness & Contrast", parameterCount: 2, parameterNames : ["Brightness", "Contrast"])]
     
     var userDefinedFilters: [UserDefinedFilter]!
     
@@ -28,20 +29,25 @@ class ViewController: UIViewController
         filtersCollectionView.addTarget(self, action: "filtersCollectionViewChangeHandler:", forControlEvents: .ValueChanged)
         
         filterParameterEditor.backgroundColor = UIColor.lightGrayColor()
+        filterParameterEditor.addTarget(self, action: "filterParameterEditorChangeHandler:", forControlEvents: .ValueChanged)
+        
         imagePreview.backgroundColor = UIColor.blackColor()
         
         view.addSubview(filtersCollectionView)
         view.addSubview(filterParameterEditor)
         view.addSubview(imagePreview)
-        
-        filterParameterEditor.numDials = 3; 
     }
 
+    func filterParameterEditorChangeHandler(value : FilterParameterEditor)
+    {
+        println("a filter has changed")
+    }
+    
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
         println("--- \(value.selectedFilter.filter.filterName)")
         
-        filterParameterEditor.numDials = value.selectedFilter.filter.parameterCount
+        filterParameterEditor.userDefinedFilter = value.selectedFilter
     }
     
     override func viewDidLayoutSubviews()

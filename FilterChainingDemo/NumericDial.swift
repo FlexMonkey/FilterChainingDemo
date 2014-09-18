@@ -14,6 +14,7 @@ class NumericDial: UIControl
     let maximumValue = 1.0
     let trackLayer = NumericDialTrack()
     let label = UILabel();
+    let titleLabel = UILabel()
     
     override init(frame: CGRect)
     {
@@ -25,6 +26,9 @@ class NumericDial: UIControl
         
         label.textAlignment = NSTextAlignment.Center
         self.addSubview(label)
+        
+        titleLabel.textAlignment = NSTextAlignment.Center
+        self.addSubview(titleLabel)
         
         drawTrack()
     }
@@ -92,6 +96,13 @@ class NumericDial: UIControl
         }
     }
 
+    var title : String = ""
+    {
+        didSet
+        {
+            titleLabel.text = title
+        }
+    }
     
     func drawTrack()
     {
@@ -106,6 +117,8 @@ class NumericDial: UIControl
     {
         didSet
         {
+            titleLabel.frame = CGRect(x: 0, y: frame.height - 23, width: frame.width, height: 20)
+            
             drawTrack()
         }
     }

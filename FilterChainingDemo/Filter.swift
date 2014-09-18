@@ -14,10 +14,12 @@ class Filter
     
     var filterName: String!
     var parameterCount : Int!
+    var parameterNames : [String]!
     
-    init(filterName: String, parameterCount: Int)
+    init(filterName: String, parameterCount: Int, parameterNames : [String])
     {
         self.filterName = filterName
         self.parameterCount = parameterCount
+        self.parameterNames = parameterNames
     }
 }

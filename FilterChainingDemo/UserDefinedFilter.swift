@@ -12,8 +12,12 @@ class UserDefinedFilter
 {
     var filter: Filter!
     
+    var values: [Double]!
+    
     init(filter: Filter)
     {
         self.filter = filter
+        
+        values = [Double](count: filter.parameterCount, repeatedValue: 0.0)
     }
 }

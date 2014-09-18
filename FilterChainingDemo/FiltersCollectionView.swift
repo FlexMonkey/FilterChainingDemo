@@ -22,6 +22,8 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         collectionView.registerClass(FiltersCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.backgroundColor = UIColor.lightGrayColor()
         
+        collectionView.allowsSelection = true
+        
         super.init(frame: frame)
 
         collectionView.dataSource = self
