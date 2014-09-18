@@ -30,17 +30,44 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         addSubview(collectionView)
     }
     
+    var indexPath : NSIndexPath?
+    {
+        didSet
+        {
+            var foo = [NSIndexPath]()
+            
+            if let tmp = oldValue
+            {
+                foo.append(tmp)
+            }
+            
+            if let tmp = indexPath
+            {
+                foo.append(tmp)
+            }
+            
+            collectionView.reloadItemsAtIndexPaths(foo)
+            
+            // dispatch action
+        }
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return 10
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        self.indexPath = indexPath
+    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FiltersCollectionViewCell
         
-        cell.backgroundColor = UIColor.whiteColor()
+        cell.backgroundColor = (self.indexPath == indexPath) ? UIColor.blueColor() : UIColor.whiteColor()
+        
         cell.setLabel("yo \(indexPath.item)")
         
         return cell
