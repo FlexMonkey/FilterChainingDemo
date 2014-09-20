@@ -54,10 +54,10 @@ class ViewController: UIViewController
     {
         let widgetWidth = Int(view.frame.width) - 20
         
-        filtersCollectionView.frame = CGRect(x: 10, y: Int(view.frame.height - 160), width: widgetWidth, height: 160)
-        filterParameterEditor.frame = CGRect(x: 10, y: Int(view.frame.height - 330), width: widgetWidth, height: 160)
+        filtersCollectionView.frame = CGRect(x: 10, y: Int(view.frame.height - 160 - 10), width: widgetWidth, height: 160)
+        filterParameterEditor.frame = CGRect(x: 10, y: Int(view.frame.height - 330 - 10), width: widgetWidth, height: 160)
         
-        let imagePreviewHeight = Int(view.frame.height) - Int(topLayoutGuide.length) - 350
+        let imagePreviewHeight = Int(view.frame.height) - Int(topLayoutGuide.length) - 350 - 10
         let imagePreviewY = Int(topLayoutGuide.length) + 10
         
         imagePreview.frame = CGRect(x: 10, y: imagePreviewY, width: widgetWidth, height: imagePreviewHeight)

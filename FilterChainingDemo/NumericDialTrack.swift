@@ -25,7 +25,7 @@ class NumericDialTrack: CALayer
             // outer path
             CGContextSetLineCap(ctx, kCGLineCapRound);
             CGContextAddPath(ctx, trackPath.CGPath)
-            CGContextSetStrokeColorWithColor(ctx, UIColor.darkGrayColor().CGColor)
+            CGContextSetStrokeColorWithColor(ctx, UIColor.grayColor().CGColor)
             CGContextSetLineWidth(ctx, 30)
             CGContextStrokePath(ctx)
             
