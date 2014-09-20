@@ -16,7 +16,14 @@ class FilterParameterEditor: UIControl
     {
         didSet
         {
-            numDials = userDefinedFilter.filter.parameterCount
+            if let filter = userDefinedFilter.filter
+            {
+                numDials = filter.parameterCount
+            }
+            else
+            {
+                numDials = 0
+            }
         }
     }
     
@@ -42,16 +49,22 @@ class FilterParameterEditor: UIControl
         
         for i in 0 ..< numDials
         {
-            let dial = NumericDial(frame: CGRectZero)
-            
-            dial.currentValue = userDefinedFilter.values[i]
-            dial.title = userDefinedFilter.filter.parameterNames[i]
-            
-            dial.addTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
-            
-            numericDials.append(dial)
-            
-            addSubview(dial)
+            if let udf = userDefinedFilter
+            {
+                if let udfFilter = udf.filter
+                {
+                    let dial = NumericDial(frame: CGRectZero)
+                    
+                    dial.currentValue = udf.values![i]
+                    dial.title = udfFilter.parameterNames[i]
+                    
+                    dial.addTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
+                    
+                    numericDials.append(dial)
+                    
+                    addSubview(dial)
+                }
+            }
         }
         
         setNeedsLayout()
@@ -63,7 +76,7 @@ class FilterParameterEditor: UIControl
         {
             if dial == numericDial
             {                
-                userDefinedFilter.values[i] = dial.currentValue
+                userDefinedFilter.values![i] = dial.currentValue
             }
         }
         

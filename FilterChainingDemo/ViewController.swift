@@ -24,7 +24,12 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
        
-        userDefinedFilters = [UserDefinedFilter(filter: filters[0]), UserDefinedFilter(filter: filters[1])]
+        userDefinedFilters = [
+            UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false),
+            UserDefinedFilter(filter: filters[0]),
+            UserDefinedFilter(filter: filters[1]),
+            UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)]
+        
         filtersCollectionView.userDefinedFilters = userDefinedFilters
         filtersCollectionView.addTarget(self, action: "filtersCollectionViewChangeHandler:", forControlEvents: .ValueChanged)
         
@@ -42,8 +47,6 @@ class ViewController: UIViewController
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
-        println("--- \(value.selectedFilter.filter.filterName)")
-        
         filterParameterEditor.userDefinedFilter = value.selectedFilter
     }
     

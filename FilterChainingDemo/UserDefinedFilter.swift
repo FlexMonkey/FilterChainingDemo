@@ -10,9 +10,17 @@ import Foundation
 
 class UserDefinedFilter
 {
-    var filter: Filter!
+    var filter: Filter?
+    var values: [Double]?
     
-    var values: [Double]!
+    var isImageInputNode: Bool = false
+    var isImageOutputNode: Bool = false
+    
+    init(isImageInputNode: Bool, isImageOutputNode: Bool)
+    {
+        self.isImageInputNode = isImageInputNode
+        self.isImageOutputNode = isImageOutputNode
+    }
     
     init(filter: Filter)
     {
