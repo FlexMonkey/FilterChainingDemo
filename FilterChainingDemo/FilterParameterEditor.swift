@@ -46,7 +46,6 @@ class FilterParameterEditor: UIControl
         
         numericDials = [NumericDial]()
         
-        
         for i in 0 ..< numDials
         {
             if let udf = userDefinedFilter
@@ -85,11 +84,15 @@ class FilterParameterEditor: UIControl
     
     override func layoutSubviews()
     {
-        backgroundColor = UIColor.blueColor()
+        layer.borderColor = UIColor.blueColor().CGColor
+        layer.borderWidth = 2
+        layer.cornerRadius = 10
+        
+        let startX = Int(frame.size.width) - numericDials.count * 160
         
         for (index : Int, dial : NumericDial) in enumerate(numericDials)
         {
-            dial.frame = CGRect(x: index * 160, y: 10, width: 150, height: 150)
+            dial.frame = CGRect(x: startX + index * 160, y: 10, width: 150, height: 150)
         }
     }
 

@@ -12,13 +12,15 @@ class Filter
 {
     // var ciFilter : CIFilter!
     
-    var filterName: String!
-    var parameterCount : Int!
-    var parameterNames : [String]!
+    var filterName: String
+    var parameterCount : Int
+    var parameterNames : [String]
+    var ciFilterName: String
     
-    init(filterName: String, parameterCount: Int, parameterNames : [String])
+    init(filterName: String, ciFilterName: String, parameterCount: Int, parameterNames : [String])
     {
         self.filterName = filterName
+        self.ciFilterName = ciFilterName
         self.parameterCount = parameterCount
         self.parameterNames = parameterNames
     }

@@ -37,15 +37,15 @@ class FiltersCollectionViewCell: UICollectionViewCell
 
     func updateUI()
     {
-        label.textColor = selected ? UIColor.whiteColor() : UIColor.darkGrayColor()
+        label.textColor = selected ? UIColor.blueColor() : UIColor.lightGrayColor()
         
-        backgroundColor = selected ? UIColor.blueColor() : UIColor.lightGrayColor()
+        backgroundColor = UIColor.whiteColor() 
         
         if let udf = userDefinedFilter
         {
             layer.borderWidth = 2
             layer.cornerRadius = (udf.isImageInputNode || udf.isImageOutputNode) ? frame.width / 2 : 10
-            layer.borderColor = selected ? UIColor.blueColor().CGColor : UIColor.darkGrayColor().CGColor
+            layer.borderColor = selected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
         }
     }
     

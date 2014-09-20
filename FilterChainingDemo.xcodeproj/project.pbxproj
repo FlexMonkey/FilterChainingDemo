@@ -21,6 +21,7 @@
 		BEB19D4419C8CAA500191C16 /* FilterChainingDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */; };
 		BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */; };
 		BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D5019C8D41400191C16 /* FiltersCollectionView.swift */; };
+		BEB19D5319CD4C4800191C16 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D5219CD4C4800191C16 /* Filters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		BEB19D4319C8CAA500191C16 /* FilterChainingDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChainingDemoTests.swift; sourceTree = "<group>"; };
 		BEB19D4E19C8CF6C00191C16 /* FiltersCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEB19D5019C8D41400191C16 /* FiltersCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCollectionView.swift; sourceTree = "<group>"; };
+		BEB19D5219CD4C4800191C16 /* Filters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				3EF2798919CAB315003C412E /* UserDefinedFilter.swift */,
 				3EF2798B19CAB353003C412E /* Filter.swift */,
+				BEB19D5219CD4C4800191C16 /* Filters.swift */,
 			);
 			name = valueObjects;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				3EF2798C19CAB353003C412E /* Filter.swift in Sources */,
 				3E38F31E19C9651800B86916 /* NumericDialTrack.swift in Sources */,
 				3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */,
+				BEB19D5319CD4C4800191C16 /* Filters.swift in Sources */,
 				BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */,
 				BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */,
 				3EF2798A19CAB315003C412E /* UserDefinedFilter.swift in Sources */,

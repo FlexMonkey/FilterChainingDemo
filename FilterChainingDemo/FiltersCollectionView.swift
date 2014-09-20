@@ -29,7 +29,10 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         
         addSubview(uiCollectionView)
         
-        backgroundColor = UIColor.lightGrayColor()
+        layer.borderColor = UIColor.lightGrayColor().CGColor
+        layer.borderWidth = 2
+        layer.cornerRadius = 10
+        
         uiCollectionView.backgroundColor = UIColor.clearColor()
     }
     
@@ -37,9 +40,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     {
         didSet
         {
-            // let foo: NSIndexPath = uiCollectionView.indexPathsForVisibleItems()[0] as NSIndexPath
-            
-            // uiCollectionView.selectItemAtIndexPath(foo, animated: true, scrollPosition: UICollectionViewScrollPosition.Left)
+           
         }
     }
     
