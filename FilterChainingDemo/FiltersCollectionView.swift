@@ -10,7 +10,7 @@ import UIKit
 
 class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollectionViewDelegate
 {
-    var collectionView : UICollectionView
+    var uiCollectionView : UICollectionView
     
     override init(frame: CGRect)
     {
@@ -18,25 +18,27 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         layout.scrollDirection = .Horizontal
         layout.itemSize = CGSize(width: 150, height: 150)
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.registerClass(FiltersCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.backgroundColor = UIColor.lightGrayColor()
-        
-        collectionView.allowsSelection = true
+        uiCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        uiCollectionView.registerClass(FiltersCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        uiCollectionView.allowsSelection = true
         
         super.init(frame: frame)
 
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        uiCollectionView.dataSource = self
+        uiCollectionView.delegate = self
         
-        addSubview(collectionView)
+        addSubview(uiCollectionView)
+        
+        backgroundColor = UIColor.lightGrayColor()
     }
     
     var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()
     {
         didSet
         {
+            // let foo: NSIndexPath = uiCollectionView.indexPathsForVisibleItems()[0] as NSIndexPath
             
+            // uiCollectionView.selectItemAtIndexPath(foo, animated: true, scrollPosition: UICollectionViewScrollPosition.Left)
         }
     }
     
@@ -44,20 +46,6 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     {
         didSet
         {
-            var foo = [NSIndexPath]()
-            
-            if let tmp = oldValue
-            {
-                foo.append(tmp)
-            }
-            
-            if let tmp = indexPath
-            {
-                foo.append(tmp)
-            }
-            
-            collectionView.reloadItemsAtIndexPaths(foo)
-            
             sendActionsForControlEvents(.ValueChanged)
         }
     }
@@ -83,9 +71,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FiltersCollectionViewCell
-        
-        cell.backgroundColor = (self.indexPath == indexPath) ? UIColor.blueColor() : UIColor.whiteColor()
-        
+    
         cell.userDefinedFilter = userDefinedFilters[indexPath.item]
         
         return cell
@@ -94,12 +80,12 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     override func layoutSubviews()
     {
         
-        collectionView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        uiCollectionView.frame = CGRect(x: 4, y: 0, width: frame.width - 8, height: frame.height)
     }
     
     required init(coder aDecoder: NSCoder)
     {
-        collectionView = UICollectionView(frame: CGRectZero)
+        uiCollectionView = UICollectionView(frame: CGRectZero)
         super.init(coder: aDecoder)
     }
 

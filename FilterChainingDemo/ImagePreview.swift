@@ -10,14 +10,49 @@ import UIKit
 
 class ImagePreview: UIControl
 {
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
+    let imagePreviewSelected = UIControl(frame: CGRectZero)
+    let imagePreviewFinal = UIControl(frame: CGRectZero)
+    
+    override init(frame: CGRect)
     {
-        // Drawing code
+        super.init(frame: frame)
+        
+        imagePreviewSelected.backgroundColor = UIColor.redColor()
+        imagePreviewFinal.backgroundColor = UIColor.blueColor()
+        
+        addSubview(imagePreviewSelected)
+        addSubview(imagePreviewFinal)
+        
     }
-    */
+
+    required init(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override func layoutSubviews()
+    {
+        println("\(frame.size.width) x \(frame.size.height)")
+        
+        if frame.size.width < frame.size.height
+        {
+            // portrait mode
+            let widgetWidth = Int(frame.size.width)
+            let widgetHeight = Int(frame.size.height) / 2
+            
+            imagePreviewSelected.frame = CGRect(x: 5, y: 0, width: widgetWidth - 10, height: widgetHeight)
+            imagePreviewFinal.frame = CGRect(x: 0, y: widgetHeight, width: widgetWidth, height: widgetHeight)
+        }
+        else
+        {
+            // landscape mode
+            let widgetWidth = Int(frame.size.width) / 2
+            let widgetHeight = Int(frame.size.height)
+            
+            imagePreviewSelected.frame = CGRect(x: widgetWidth, y: 0, width: widgetWidth - 5, height: widgetHeight)
+            imagePreviewFinal.frame = CGRect(x: 0, y: 0, width: widgetWidth, height: widgetHeight - 50)
+        }
+    }
 
 }
