@@ -67,8 +67,15 @@ class ViewController: UIViewController, UIToolbarDelegate
         didSet
         {
             filterParameterEditor.userDefinedFilter = selectedFilter
-            
-            deleteFilterButton.enabled = selectedFilter != nil
+   
+            if let udf = selectedFilter
+            {
+                deleteFilterButton.enabled = !udf.isImageInputNode && !udf.isImageOutputNode
+            }
+            else
+            {
+                deleteFilterButton.enabled = false
+            }
         }
     }
     
