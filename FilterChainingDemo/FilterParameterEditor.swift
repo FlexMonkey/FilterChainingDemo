@@ -72,6 +72,8 @@ class FilterParameterEditor: UIControl
     
     override func layoutSubviews()
     {
+        backgroundColor = UIColor.blueColor()
+        
         for (index : Int, dial : NumericDial) in enumerate(numericDials)
         {
             dial.frame = CGRect(x: index * 160, y: 10, width: 150, height: 150)

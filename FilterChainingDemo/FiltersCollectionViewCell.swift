@@ -18,7 +18,8 @@ class FiltersCollectionViewCell: UICollectionViewCell
             
         
         label = UILabel(frame: CGRectZero)
-        label.frame = frameForAlignmentRect(CGRect(x: 0, y: 0, width: 100, height: 100))
+        label.numberOfLines = 0
+        label.frame = bounds.rectByInsetting(dx: 0, dy: 0)
         label.textAlignment = NSTextAlignment.Center
         
         contentView.addSubview(label)
@@ -41,7 +42,8 @@ class FiltersCollectionViewCell: UICollectionViewCell
         backgroundColor = selected ? UIColor.blueColor() : UIColor.lightGrayColor()
         
         layer.borderWidth = 2
-        layer.borderColor = selected ? UIColor.blueColor().CGColor : UIColor.whiteColor().CGColor
+        layer.cornerRadius = frame.width / 2
+        layer.borderColor = selected ? UIColor.blueColor().CGColor : UIColor.darkGrayColor().CGColor
     }
     
     var userDefinedFilter : UserDefinedFilter!

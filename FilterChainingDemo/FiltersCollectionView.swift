@@ -30,6 +30,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         addSubview(uiCollectionView)
         
         backgroundColor = UIColor.lightGrayColor()
+        uiCollectionView.backgroundColor = UIColor.clearColor()
     }
     
     var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()

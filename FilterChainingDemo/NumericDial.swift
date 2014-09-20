@@ -25,9 +25,12 @@ class NumericDial: UIControl
         layer.addSublayer(trackLayer)
         
         label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.whiteColor()
         self.addSubview(label)
         
         titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textColor = UIColor.whiteColor()
+        
         self.addSubview(titleLabel)
         
         drawTrack()

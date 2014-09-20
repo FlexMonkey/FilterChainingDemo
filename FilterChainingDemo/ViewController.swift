@@ -28,11 +28,8 @@ class ViewController: UIViewController
         filtersCollectionView.userDefinedFilters = userDefinedFilters
         filtersCollectionView.addTarget(self, action: "filtersCollectionViewChangeHandler:", forControlEvents: .ValueChanged)
         
-        filterParameterEditor.backgroundColor = UIColor.lightGrayColor()
         filterParameterEditor.addTarget(self, action: "filterParameterEditorChangeHandler:", forControlEvents: .ValueChanged)
-        
-        imagePreview.backgroundColor = UIColor.blackColor()
-        
+      
         view.addSubview(filtersCollectionView)
         view.addSubview(filterParameterEditor)
         view.addSubview(imagePreview)
@@ -62,6 +59,6 @@ class ViewController: UIViewController
         
         imagePreview.frame = CGRect(x: 10, y: imagePreviewY, width: widgetWidth, height: imagePreviewHeight)
     }
-
+  
 }
 

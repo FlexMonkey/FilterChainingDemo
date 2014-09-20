@@ -17,8 +17,8 @@ class ImagePreview: UIControl
     {
         super.init(frame: frame)
         
-        imagePreviewSelected.backgroundColor = UIColor.redColor()
-        imagePreviewFinal.backgroundColor = UIColor.blueColor()
+        imagePreviewSelected.backgroundColor = UIColor.blueColor()
+        imagePreviewFinal.backgroundColor = UIColor.blackColor()
         
         addSubview(imagePreviewSelected)
         addSubview(imagePreviewFinal)
@@ -33,25 +33,21 @@ class ImagePreview: UIControl
     
     override func layoutSubviews()
     {
-        println("\(frame.size.width) x \(frame.size.height)")
-        
-        if frame.size.width < frame.size.height
+        if UIApplication.sharedApplication().statusBarOrientation.isPortrait
         {
-            // portrait mode
             let widgetWidth = Int(frame.size.width)
             let widgetHeight = Int(frame.size.height) / 2
             
-            imagePreviewSelected.frame = CGRect(x: 5, y: 0, width: widgetWidth - 10, height: widgetHeight)
-            imagePreviewFinal.frame = CGRect(x: 0, y: widgetHeight, width: widgetWidth, height: widgetHeight)
+            imagePreviewFinal.frame = CGRect(x: 0, y: 0, width: widgetWidth, height: widgetHeight)
+            imagePreviewSelected.frame = CGRect(x: 0, y: widgetHeight, width: widgetWidth, height: widgetHeight)
         }
         else
         {
-            // landscape mode
             let widgetWidth = Int(frame.size.width) / 2
             let widgetHeight = Int(frame.size.height)
             
-            imagePreviewSelected.frame = CGRect(x: widgetWidth, y: 0, width: widgetWidth - 5, height: widgetHeight)
-            imagePreviewFinal.frame = CGRect(x: 0, y: 0, width: widgetWidth, height: widgetHeight - 50)
+            imagePreviewFinal.frame = CGRect(x: widgetWidth, y: 0, width: widgetWidth, height: widgetHeight)
+            imagePreviewSelected.frame = CGRect(x: 0, y: 0, width: widgetWidth, height: widgetHeight)
         }
     }
 
