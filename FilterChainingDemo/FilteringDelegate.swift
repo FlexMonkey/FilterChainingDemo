@@ -68,6 +68,7 @@ class FilteringDelegate
                 {
                     inputImage = CIImage(image: img)
                     
+                    finalImage = img
                     selectedImage = img
                 }
                 else if let userDefinedFilterFilter = userDefinedFilter.filter

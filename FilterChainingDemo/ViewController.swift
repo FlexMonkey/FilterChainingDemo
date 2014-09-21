@@ -93,6 +93,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         userDefinedFilters = userDefinedFilters.filter({!($0 == self.selectedFilter!)})
         
         filtersCollectionView.userDefinedFilters = userDefinedFilters
+        
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
     }
     
     func addNewFilter(value: UIBarButtonItem)
@@ -100,6 +102,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         userDefinedFilters.insert(UserDefinedFilter(filter: Filters.filters[0]), atIndex: userDefinedFilters.count - 1)
   
         filtersCollectionView.userDefinedFilters = userDefinedFilters
+        
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
     }
     
     func imagesDidChange(images: FilteredImages)
