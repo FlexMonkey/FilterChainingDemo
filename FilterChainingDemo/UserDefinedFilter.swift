@@ -11,6 +11,8 @@ import UIKit
 
 class UserDefinedFilter
 {
+    let uuid = NSUUID.UUID().UUIDString
+    
     var values: [Double]?
     
     var isImageInputNode: Bool = false
@@ -28,14 +30,29 @@ class UserDefinedFilter
     {
         self.filter = filter
         
-        values = [Double](count: filter.parameterCount, repeatedValue: 0.0)
+        setValuesFromFilter()
     }
     
     var filter: Filter?
     {
         didSet
         {
-            values = [Double](count: filter!.parameterCount, repeatedValue: 0.0) // should be defaults
+            setValuesFromFilter()
         }
     }
+    
+    func setValuesFromFilter()
+    {
+        values = [Double]()
+        
+        for filterParameter in filter!.filterParameters
+        {
+            values?.append(filterParameter.defaultValue)
+        }
+    }
+}
+
+func == (left: UserDefinedFilter, right: UserDefinedFilter) -> Bool
+{
+    return left.uuid == right.uuid
 }

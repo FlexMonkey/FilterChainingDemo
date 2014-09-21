@@ -108,7 +108,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                     let dial = NumericDial(frame: CGRectZero)
                     
                     dial.currentValue = udf.values![i]
-                    dial.title = udfFilter.parameterNames[i]
+                    dial.title = udfFilter.filterParameters[i].parameterName
                     
                     dial.addTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
                     
@@ -193,7 +193,6 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         if (userDefinedFilter?.isImageInputNode != false)
         {
             loadImageButton?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-            println("load image")
         }
         else
         {

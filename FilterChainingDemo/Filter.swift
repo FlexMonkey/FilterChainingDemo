@@ -7,21 +7,30 @@
 //
 
 import Foundation
+import UIKit
 
 class Filter
 {
-    // var ciFilter : CIFilter!
+    let ciFilter : CIFilter
     
-    var filterName: String
-    var parameterCount : Int
-    var parameterNames : [String]
-    var ciFilterName: String
+    let filterName: String
+    let filterParameters : [FilterParameter]
+    let ciFilterName: String
     
-    init(filterName: String, ciFilterName: String, parameterCount: Int, parameterNames : [String])
+    init(filterName: String, ciFilterName: String, filterParameters : [FilterParameter])
     {
         self.filterName = filterName
         self.ciFilterName = ciFilterName
-        self.parameterCount = parameterCount
-        self.parameterNames = parameterNames
+        self.filterParameters = filterParameters
+        
+        ciFilter = CIFilter(name: ciFilterName)
+    }
+    
+    var parameterCount: Int
+    {
+        get
+        {
+            return filterParameters.count
+        }
     }
 }

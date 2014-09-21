@@ -106,9 +106,7 @@ class ViewController: UIViewController, UIToolbarDelegate
     {
         filtersCollectionView.refresh()
         
-        filteringDelegate.applyFilters(userDefinedFilters, imagesDidChange)
-        
-        println("a filter has changed")
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
     }
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
