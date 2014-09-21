@@ -71,13 +71,20 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         view.addSubview(toolbar)
         
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: userDefinedFilters[0], imagesDidChange)
+        selectedFilter = userDefinedFilters[0]
+        
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
     }
 
     var selectedFilter: UserDefinedFilter?
     {
         didSet
         {
+            if selectedFilter == nil
+            {
+                selectedFilter = userDefinedFilters[0]
+            }
+            
             filterParameterEditor.userDefinedFilter = selectedFilter
    
             if let userDefinedFilterConst = selectedFilter
