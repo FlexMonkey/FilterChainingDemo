@@ -21,12 +21,15 @@ class ViewController: UIViewController, UIToolbarDelegate
     let addNewFilterButton: UIBarButtonItem!
     let deleteFilterButton: UIBarButtonItem!
     
+    let filteringDelegate: FilteringDelegate!
+    
     override init()
     {
         super.init()
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
         deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
+        filteringDelegate = FilteringDelegate(controller: self)
         
         filterParameterEditor.viewController = self
     }
@@ -37,6 +40,7 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
         deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
+        filteringDelegate = FilteringDelegate(controller: self)
         
         filterParameterEditor.viewController = self
     }
@@ -93,9 +97,16 @@ class ViewController: UIViewController, UIToolbarDelegate
         println("addNewFilter")
     }
     
+    func imagesDidChange(images: FilteredImages)
+    {
+        imagePreview.filteredImages = images
+    }
+    
     func filterParameterEditorChangeHandler(value : FilterParameterEditor)
     {
         filtersCollectionView.refresh()
+        
+        filteringDelegate.applyFilters(userDefinedFilters, imagesDidChange)
         
         println("a filter has changed")
     }

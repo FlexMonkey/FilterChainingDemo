@@ -10,8 +10,8 @@ import UIKit
 
 class ImagePreview: UIControl
 {
-    let imagePreviewSelected = UIControl(frame: CGRectZero)
-    let imagePreviewFinal = UIControl(frame: CGRectZero)
+    let imagePreviewSelected = UIImageView(frame: CGRectZero)
+    let imagePreviewFinal = UIImageView(frame: CGRectZero)
     
     override init(frame: CGRect)
     {
@@ -20,10 +20,12 @@ class ImagePreview: UIControl
         imagePreviewSelected.layer.borderColor = UIColor.blueColor().CGColor
         imagePreviewSelected.layer.borderWidth = 2
         imagePreviewSelected.layer.cornerRadius = 10
+        imagePreviewSelected.contentMode = UIViewContentMode.ScaleAspectFit
         
         imagePreviewFinal.layer.borderColor = UIColor.blackColor().CGColor
         imagePreviewFinal.layer.borderWidth = 2
         imagePreviewFinal.layer.cornerRadius = 10
+        imagePreviewFinal.contentMode = UIViewContentMode.ScaleAspectFit
         
         addSubview(imagePreviewSelected)
         addSubview(imagePreviewFinal)
@@ -35,6 +37,15 @@ class ImagePreview: UIControl
         super.init(coder: aDecoder)
     }
     
+    var filteredImages: FilteredImages!
+    {
+        didSet
+        {
+            imagePreviewSelected.image = filteredImages.selectedImage
+            imagePreviewFinal.image = filteredImages.finalImage
+        }
+        
+    }
     
     override func layoutSubviews()
     {
