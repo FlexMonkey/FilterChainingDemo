@@ -52,6 +52,7 @@ class ViewController: UIViewController, UIToolbarDelegate
         userDefinedFilters = [
             UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false),
             UserDefinedFilter(filter: Filters.filters[0]),
+            UserDefinedFilter(filter: Filters.filters[4]),
             UserDefinedFilter(filter: Filters.filters[1]),
             UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)]
         
@@ -112,6 +113,8 @@ class ViewController: UIViewController, UIToolbarDelegate
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
         selectedFilter = value.selectedFilter
+        
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
     }
     
     override func viewDidLayoutSubviews()

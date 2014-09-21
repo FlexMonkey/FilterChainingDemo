@@ -14,6 +14,8 @@ class FilteringDelegate
     let ciContext = CIContext(options: nil)
     let controller: UIViewController
     var filteredImages: FilteredImages!
+    var filtersRuning: Bool = false;
+    var changePending: Bool = false;
     
     private var callbackFunction: ((FilteredImages) -> (Void))!
     
@@ -21,10 +23,7 @@ class FilteringDelegate
     {
         self.controller = controller
     }
-    
-    var filtersRuning : Bool = false;
-    var changePending : Bool = false;
-    
+
     func applyFilters(userDefinedFilters: [UserDefinedFilter], selectedUserDefinedFilter: UserDefinedFilter, callbackFunction : ((FilteredImages) -> (Void)) )
     {
         if !self.filtersRuning
@@ -43,8 +42,6 @@ class FilteringDelegate
                     
                     if self.changePending
                     {
-                        println("changePending!")
-                        
                         self.changePending = false
                         self.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, callbackFunction: callbackFunction)
                     }
@@ -87,20 +84,31 @@ class FilteringDelegate
                     }
                     
                     let filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as CIImage
-                    let filteredImageRef = context.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
                     
                     inputImage = filteredImageData
-                    
-                    let filteredImage = UIImage(CGImage: filteredImageRef)
-                    
-                    if userDefinedFilter == selectedUserDefinedFilter
+
+                    if userDefinedFilter == selectedUserDefinedFilter || index == userDefinedFilters.count - 2
                     {
-                        selectedImage = filteredImage
+                        let filteredImageRef = context.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
+                        let filteredImage = UIImage(CGImage: filteredImageRef)
+                        
+                        if userDefinedFilter == selectedUserDefinedFilter
+                        {
+                            selectedImage = filteredImage
+                        }
+                        
+                        if (index == userDefinedFilters.count - 2)
+                        {
+                            finalImage = filteredImage
+                        }
                     }
-                    
-                    finalImage = filteredImage
                 }
             }
+        }
+        else
+        {
+            selectedImage = UIImage()
+            finalImage = UIImage()
         }
         
         return FilteredImages(selectedImage: selectedImage, finalImage: finalImage)

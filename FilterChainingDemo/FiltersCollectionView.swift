@@ -38,7 +38,11 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     
     func refresh()
     {
+        let indexPathsForSelectedItem = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
+        
         uiCollectionView.reloadData()
+        
+        uiCollectionView.selectItemAtIndexPath(indexPathsForSelectedItem, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
     }
     
     var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()

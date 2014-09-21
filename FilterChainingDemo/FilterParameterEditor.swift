@@ -138,7 +138,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     {
         if let rawImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-            userDefinedFilter.inputImage = rawImage.resizeToBoundingSquare(boundingSquareSideLength: 1024)
+            userDefinedFilter.inputImage = rawImage.resizeToBoundingSquare(boundingSquareSideLength: 640)
             
             applyFilters()
         }
