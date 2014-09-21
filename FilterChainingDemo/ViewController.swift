@@ -27,6 +27,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
         deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
+        
+        filterParameterEditor.viewController = self
     }
 
     required init(coder aDecoder: NSCoder)
@@ -35,6 +37,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
         deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
+        
+        filterParameterEditor.viewController = self
     }
     
     override func viewDidLoad()
@@ -68,9 +72,9 @@ class ViewController: UIViewController, UIToolbarDelegate
         {
             filterParameterEditor.userDefinedFilter = selectedFilter
    
-            if let udf = selectedFilter
+            if let userDefinedFilterConst = selectedFilter
             {
-                deleteFilterButton.enabled = !udf.isImageInputNode && !udf.isImageOutputNode
+                deleteFilterButton.enabled = !userDefinedFilterConst.isImageInputNode && !userDefinedFilterConst.isImageOutputNode
             }
             else
             {
@@ -91,6 +95,8 @@ class ViewController: UIViewController, UIToolbarDelegate
     
     func filterParameterEditorChangeHandler(value : FilterParameterEditor)
     {
+        filtersCollectionView.refresh()
+        
         println("a filter has changed")
     }
     

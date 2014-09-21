@@ -36,6 +36,11 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         uiCollectionView.backgroundColor = UIColor.clearColor()
     }
     
+    func refresh()
+    {
+        uiCollectionView.reloadData()
+    }
+    
     var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()
     {
         didSet

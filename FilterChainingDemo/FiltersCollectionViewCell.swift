@@ -41,11 +41,11 @@ class FiltersCollectionViewCell: UICollectionViewCell
         
         backgroundColor = UIColor.whiteColor() 
         
-        if let udf = userDefinedFilter
+        if let userDefinedFilterConst = userDefinedFilter
         {
             layer.borderWidth = 2
-            layer.cornerRadius = (udf.isImageInputNode || udf.isImageOutputNode) ? frame.width / 2 : 10
-            layer.borderColor = selected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
+            layer.cornerRadius = (userDefinedFilterConst.isImageInputNode || userDefinedFilterConst.isImageOutputNode) ? frame.width / 2 : 10
+            layer.borderColor = userDefinedFilterConst.isImageOutputNode ? UIColor.blackColor().CGColor : selected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
         }
     }
     

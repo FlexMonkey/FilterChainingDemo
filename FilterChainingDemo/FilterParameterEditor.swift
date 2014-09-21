@@ -5,14 +5,17 @@
 //  Created by Simon Gladman on 17/09/2014.
 //  Copyright (c) 2014 Simon Gladman. All rights reserved.
 //
+//  TODO - implement using PHImageManager (http://nshipster.com/phimagemanager/)
 
 import UIKit
 
-class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDelegate
+class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
     var numericDials = [NumericDial]()
-    let spinner : UIPickerView = UIPickerView(frame: CGRectZero)
-
+    let spinner = UIPickerView(frame: CGRectZero)
+    var loadImageButton: UIButton?
+    weak var viewController : UIViewController?
+    
     override func didMoveToWindow()
     {
         spinner.alpha = 0
@@ -26,14 +29,20 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     {
         didSet
         {
-            if let filter = userDefinedFilter.filter
+            if let filterConst = userDefinedFilter.filter
             {
-                numDials = filter.parameterCount
+                numDials = filterConst.parameterCount
                 spinner.alpha = 1
                 
-                for (index, f) in enumerate(Filters.filters)
+                if loadImageButton != nil
                 {
-                    if f.filterName == filter.filterName
+                    loadImageButton?.removeFromSuperview()
+                    loadImageButton = nil
+                }
+                
+                for (index, filter) in enumerate(Filters.filters)
+                {
+                    if filter.filterName == filterConst.filterName
                     {
                         spinner.selectRow(index, inComponent: 0, animated: true)
                     }
@@ -43,6 +52,25 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
             {
                 numDials = 0
                 spinner.alpha = 0
+                
+                if userDefinedFilter.isImageInputNode
+                {
+                    loadImageButton = UIButton()
+                    loadImageButton!.setTitle("LoadImage", forState: .Normal)
+                    loadImageButton!.setTitleColor(UIColor.blueColor(), forState: .Normal)
+                    loadImageButton!.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                    loadImageButton!.addTarget(self, action: "loadImageClickedSelector:", forControlEvents: .TouchUpInside)
+                    
+                    addSubview(loadImageButton!)
+                }
+                else if userDefinedFilter.isImageOutputNode
+                {
+                    if loadImageButton != nil
+                    {
+                        loadImageButton?.removeFromSuperview()
+                        loadImageButton = nil
+                    }
+                }
             }
         }
     }
@@ -53,6 +81,11 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         {
             createDials()
         }
+    }
+    
+    func applyFilters()
+    {
+        sendActionsForControlEvents(.ValueChanged)
     }
     
     func createDials()
@@ -89,7 +122,31 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         setNeedsLayout()
     }
     
-    func dialChangeHandler(numericDial : NumericDial)
+    func loadImageClickedSelector(button: UIButton)
+    {
+        var imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.modalInPopover = false
+        imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+        
+        viewController!.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
+    {
+        if let rawImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            userDefinedFilter.inputImage = rawImage.resizeToBoundingSquare(boundingSquareSideLength: 1024)
+            
+            applyFilters()
+        }
+        
+        viewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func dialChangeHandler(numericDial: NumericDial)
     {
         for (i : Int, dial : NumericDial) in enumerate(numericDials)
         {
@@ -109,7 +166,9 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
     {
-        // currentColor = colors[row].color
+        userDefinedFilter.filter = Filters.filters[row]
+        numDials = userDefinedFilter.filter!.parameterCount
+        sendActionsForControlEvents(.ValueChanged)
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
@@ -122,20 +181,31 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         return Filters.filters.count
     }
     
-    override func layoutSubviews()
+    override func didMoveToSuperview()
     {
         layer.borderColor = UIColor.blueColor().CGColor
         layer.borderWidth = 2
         layer.cornerRadius = 10
-
-        let startX = Int(frame.size.width) - numericDials.count * 160
-        
-        for (index : Int, dial : NumericDial) in enumerate(numericDials)
+    }
+    
+    override func layoutSubviews()
+    {
+        if (userDefinedFilter?.isImageInputNode != false)
         {
-            dial.frame = CGRect(x: startX + index * 160, y: 10, width: 150, height: 150)
+            loadImageButton?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+            println("load image")
         }
-        
-        spinner.frame = CGRect(x: 10, y: 10, width: 200, height: frame.size.height - 20)
+        else
+        {
+            let startX = Int(frame.size.width) - numericDials.count * 160
+            
+            for (index : Int, dial : NumericDial) in enumerate(numericDials)
+            {
+                dial.frame = CGRect(x: startX + index * 160, y: 10, width: 150, height: 150)
+            }
+            
+            spinner.frame = CGRect(x: 10, y: 10, width: 200, height: frame.size.height - 20)
+        }
     }
 
 }

@@ -13,6 +13,7 @@
 		3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F32019C96A3D00B86916 /* ImagePreview.swift */; };
 		3EF2798A19CAB315003C412E /* UserDefinedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2798919CAB315003C412E /* UserDefinedFilter.swift */; };
 		3EF2798C19CAB353003C412E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2798B19CAB353003C412E /* Filter.swift */; };
+		BE0F4A4919CE97330043A0A1 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */; };
 		BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */; };
 		BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2F19C8CAA500191C16 /* ViewController.swift */; };
 		BEB19D3319C8CAA500191C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3119C8CAA500191C16 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		3E38F32019C96A3D00B86916 /* ImagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		3EF2798919CAB315003C412E /* UserDefinedFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedFilter.swift; sourceTree = "<group>"; };
 		3EF2798B19CAB353003C412E /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		BEB19D2819C8CAA500191C16 /* FilterChainingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterChainingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB19D2C19C8CAA500191C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			name = valueObjects;
 			sourceTree = "<group>";
 		};
+		BE0F4A4719CE970E0043A0A1 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		BEB19D1F19C8CAA500191C16 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +140,7 @@
 		BEB19D2A19C8CAA500191C16 /* FilterChainingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BE0F4A4719CE970E0043A0A1 /* extensions */,
 				3EF2798819CAB2EA003C412E /* valueObjects */,
 				3E38F31F19C96A1E00B86916 /* imagePreview */,
 				3E38F31A19C964B700B86916 /* numericDial */,
@@ -290,6 +301,7 @@
 				3E38F31D19C9651800B86916 /* NumericDial.swift in Sources */,
 				BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */,
 				3E38F31919C9635A00B86916 /* FilterParameterEditor.swift in Sources */,
+				BE0F4A4919CE97330043A0A1 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

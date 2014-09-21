@@ -7,14 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDefinedFilter
 {
-    var filter: Filter?
     var values: [Double]?
     
     var isImageInputNode: Bool = false
     var isImageOutputNode: Bool = false
+    
+    var inputImage: UIImage?
     
     init(isImageInputNode: Bool, isImageOutputNode: Bool)
     {
@@ -27,5 +29,13 @@ class UserDefinedFilter
         self.filter = filter
         
         values = [Double](count: filter.parameterCount, repeatedValue: 0.0)
+    }
+    
+    var filter: Filter?
+    {
+        didSet
+        {
+            values = [Double](count: filter!.parameterCount, repeatedValue: 0.0) // should be defaults
+        }
     }
 }
