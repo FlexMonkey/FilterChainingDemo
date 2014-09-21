@@ -22,10 +22,42 @@ class FilteringDelegate
         self.controller = controller
     }
     
+    var filtersRuning : Bool = false;
+    var changePending : Bool = false;
+    
     func applyFilters(userDefinedFilters: [UserDefinedFilter], selectedUserDefinedFilter: UserDefinedFilter, callbackFunction : ((FilteredImages) -> (Void)) )
     {
-        self.callbackFunction = callbackFunction
-        
+        if !self.filtersRuning
+        {
+            Async.background
+                {
+                    self.filtersRuning = true
+                    self.callbackFunction = callbackFunction
+                    self.filteredImages = FilteringDelegate.applyFilterAsync(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, context: self.ciContext)
+                    
+                }
+                .main
+                {
+                    self.filtersRuning = false
+                    self.callbackFunction(self.filteredImages)
+                    
+                    if self.changePending
+                    {
+                        println("changePending!")
+                        
+                        self.changePending = false
+                        self.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, callbackFunction: callbackFunction)
+                    }
+            }
+        }
+        else
+        {
+            changePending = true
+        }
+    }
+    
+    class func applyFilterAsync(userDefinedFilters: [UserDefinedFilter], selectedUserDefinedFilter: UserDefinedFilter, context : CIContext) -> FilteredImages
+    {
         var selectedImage:UIImage!
         var finalImage:UIImage!
         
@@ -55,7 +87,7 @@ class FilteringDelegate
                     }
                     
                     let filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as CIImage
-                    let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
+                    let filteredImageRef = context.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
                     
                     inputImage = filteredImageData
                     
@@ -71,8 +103,7 @@ class FilteringDelegate
             }
         }
         
-        filteredImages = FilteredImages(selectedImage: selectedImage, finalImage: finalImage)
-        callbackFunction(filteredImages)
+        return FilteredImages(selectedImage: selectedImage, finalImage: finalImage)
     }
     
 }
