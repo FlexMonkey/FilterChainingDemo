@@ -52,9 +52,10 @@ class ViewController: UIViewController, UIToolbarDelegate
         userDefinedFilters = [
             UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false),
             UserDefinedFilter(filter: Filters.filters[0]),
-            UserDefinedFilter(filter: Filters.filters[4]),
             UserDefinedFilter(filter: Filters.filters[1]),
             UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)]
+        
+        userDefinedFilters[0].inputImage = UIImage(named: "grand_canyon.jpg")
         
         filtersCollectionView.userDefinedFilters = userDefinedFilters
         filtersCollectionView.addTarget(self, action: "filtersCollectionViewChangeHandler:", forControlEvents: .ValueChanged)
@@ -69,6 +70,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         view.addSubview(imagePreview)
         
         view.addSubview(toolbar)
+        
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: userDefinedFilters[0], imagesDidChange)
     }
 
     var selectedFilter: UserDefinedFilter?

@@ -52,7 +52,7 @@ class UserDefinedFilter
     }
 }
 
-func == (left: UserDefinedFilter, right: UserDefinedFilter) -> Bool
-{
-    return left.uuid == right.uuid
-}
+    func == (left: UserDefinedFilter, right: UserDefinedFilter) -> Bool
+    {
+        return left.uuid == right.uuid
+    }

@@ -17,6 +17,7 @@
 		BE0F4A4B19CEA1B50043A0A1 /* FilteringDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4A4A19CEA1B50043A0A1 /* FilteringDelegate.swift */; };
 		BE0F4A4E19CEA3DD0043A0A1 /* FilteredImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4A4D19CEA3DD0043A0A1 /* FilteredImages.swift */; };
 		BE0F4A5119CEF09D0043A0A1 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4A5019CEF09D0043A0A1 /* Async.swift */; };
+		BE0F4A5319CF67790043A0A1 /* grand_canyon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE0F4A5219CF67790043A0A1 /* grand_canyon.jpg */; };
 		BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */; };
 		BEB19D3019C8CAA500191C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB19D2F19C8CAA500191C16 /* ViewController.swift */; };
 		BEB19D3319C8CAA500191C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB19D3119C8CAA500191C16 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		BE0F4A4A19CEA1B50043A0A1 /* FilteringDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteringDelegate.swift; sourceTree = "<group>"; };
 		BE0F4A4D19CEA3DD0043A0A1 /* FilteredImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredImages.swift; sourceTree = "<group>"; };
 		BE0F4A5019CEF09D0043A0A1 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		BE0F4A5219CF67790043A0A1 /* grand_canyon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grand_canyon.jpg; sourceTree = "<group>"; };
 		BEB19D2819C8CAA500191C16 /* FilterChainingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterChainingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB19D2C19C8CAA500191C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB19D2D19C8CAA500191C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		BEB19D2A19C8CAA500191C16 /* FilterChainingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BE0F4A5219CF67790043A0A1 /* grand_canyon.jpg */,
 				BE0F4A4F19CEF0880043A0A1 /* async */,
 				BE0F4A4C19CEA3C40043A0A1 /* delegates */,
 				BE0F4A4719CE970E0043A0A1 /* extensions */,
@@ -297,6 +300,7 @@
 			files = (
 				BEB19D3319C8CAA500191C16 /* Main.storyboard in Resources */,
 				BEB19D3819C8CAA500191C16 /* LaunchScreen.xib in Resources */,
+				BE0F4A5319CF67790043A0A1 /* grand_canyon.jpg in Resources */,
 				BEB19D3519C8CAA500191C16 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

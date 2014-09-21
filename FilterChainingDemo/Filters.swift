@@ -15,13 +15,13 @@ struct Filters
         Filter(filterName: "Bloom",
             ciFilterName: "CIBloom",
             filterParameters: [
-                FilterParameter(parameterName: "Radius", ciParameterName: "inputRadius", defaultValue: 0.25, multiplier: 20),
+                FilterParameter(parameterName: "Radius", ciParameterName: "inputRadius", defaultValue: 0.5, multiplier: 20),
                 FilterParameter(parameterName: "Intensity", ciParameterName: "inputIntensity", defaultValue: 0.5, multiplier: 2)]),
         
         Filter(filterName: "Color Controls",
             ciFilterName: "CIColorControls",
             filterParameters: [
-                    FilterParameter(parameterName: "Saturation", ciParameterName: "inputSaturation", defaultValue: 0.25, multiplier: 2),
+                    FilterParameter(parameterName: "Saturation", ciParameterName: "inputSaturation", defaultValue: 0.75, multiplier: 2),
                     FilterParameter(parameterName: "Brightness", ciParameterName: "inputBrightness", defaultValue: 0, multiplier: 1),
                     FilterParameter(parameterName: "Contrast", ciParameterName: "inputContrast", defaultValue: 0.5, multiplier: 2)]),
         
