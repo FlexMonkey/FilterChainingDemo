@@ -12,17 +12,17 @@ import UIKit
 class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
     var numericDials = [NumericDial]()
-    let spinner = UIPickerView(frame: CGRectZero)
+    let filterPicker = UIPickerView(frame: CGRectZero)
     var loadImageButton: UIButton?
     weak var viewController : UIViewController?
     
     override func didMoveToWindow()
     {
-        spinner.alpha = 0
-        spinner.delegate = self
-        spinner.dataSource = self
+        filterPicker.alpha = 0
+        filterPicker.delegate = self
+        filterPicker.dataSource = self
         
-        addSubview(spinner)
+        addSubview(filterPicker)
     }
 
     var userDefinedFilter : UserDefinedFilter!
@@ -32,7 +32,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
             if let filterConst = userDefinedFilter.filter
             {
                 numDials = filterConst.parameterCount
-                spinner.alpha = 1
+                filterPicker.alpha = 1
                 
                 if loadImageButton != nil
                 {
@@ -44,14 +44,14 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                 {
                     if filter.filterName == filterConst.filterName
                     {
-                        spinner.selectRow(index, inComponent: 0, animated: true)
+                        filterPicker.selectRow(index, inComponent: 0, animated: true)
                     }
                 }
             }
             else
             {
                 numDials = 0
-                spinner.alpha = 0
+                filterPicker.alpha = 0
                 
                 if userDefinedFilter.isImageInputNode
                 {
@@ -203,7 +203,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                 dial.frame = CGRect(x: startX + index * 160, y: 10, width: 150, height: 150)
             }
             
-            spinner.frame = CGRect(x: 10, y: 10, width: 200, height: frame.size.height - 20)
+            filterPicker.frame = CGRect(x: 10, y: 10, width: 225, height: frame.size.height - 20)
         }
     }
 

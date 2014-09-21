@@ -38,18 +38,25 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     
     func refresh()
     {
-        let indexPathsForSelectedItem = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
+        if uiCollectionView.indexPathsForSelectedItems().count > 0
+        {
+            let indexPathsForSelectedItem = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
         
-        uiCollectionView.reloadData()
+            uiCollectionView.reloadData()
         
-        uiCollectionView.selectItemAtIndexPath(indexPathsForSelectedItem, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
+            uiCollectionView.selectItemAtIndexPath(indexPathsForSelectedItem, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
+        }
+        else
+        {
+            uiCollectionView.reloadData()
+        }
     }
     
     var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter]()
     {
         didSet
         {
-           
+           refresh()
         }
     }
     
