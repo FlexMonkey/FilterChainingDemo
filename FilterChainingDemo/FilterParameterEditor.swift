@@ -25,11 +25,11 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         addSubview(filterPicker)
     }
 
-    var userDefinedFilter : UserDefinedFilter!
+    var selectedFilter : UserDefinedFilter!
     {
         didSet
         {
-            if let filterConst = userDefinedFilter.filter
+            if let filterConst = selectedFilter.filter
             {
                 numDials = filterConst.parameterCount
                 filterPicker.alpha = 1
@@ -53,7 +53,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                 numDials = 0
                 filterPicker.alpha = 0
                 
-                if userDefinedFilter.isImageInputNode
+                if selectedFilter.isImageInputNode
                 {
                     loadImageButton = UIButton()
                     loadImageButton!.setTitle("LoadImage", forState: .Normal)
@@ -63,7 +63,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                     
                     addSubview(loadImageButton!)
                 }
-                else if userDefinedFilter.isImageOutputNode
+                else if selectedFilter.isImageOutputNode
                 {
                     if loadImageButton != nil
                     {
@@ -101,7 +101,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         
         for i in 0 ..< numDials
         {
-            if let udf = userDefinedFilter
+            if let udf = selectedFilter
             {
                 if let udfFilter = udf.filter
                 {
@@ -138,7 +138,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     {
         if let rawImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-            userDefinedFilter.inputImage = rawImage.resizeToBoundingSquare(boundingSquareSideLength: 640)
+            selectedFilter.inputImage = rawImage.resizeToBoundingSquare(boundingSquareSideLength: 640)
             
             applyFilters()
         }
@@ -152,7 +152,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         {
             if dial == numericDial
             {                
-                userDefinedFilter.values![i] = dial.currentValue
+                selectedFilter.values![i] = dial.currentValue
             }
         }
         
@@ -166,8 +166,8 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
     {
-        userDefinedFilter.filter = Filters.filters[row]
-        numDials = userDefinedFilter.filter!.parameterCount
+        selectedFilter.filter = Filters.filters[row]
+        numDials = selectedFilter.filter!.parameterCount
         sendActionsForControlEvents(.ValueChanged)
     }
     
@@ -190,7 +190,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     
     override func layoutSubviews()
     {
-        if (userDefinedFilter?.isImageInputNode != false)
+        if (selectedFilter?.isImageInputNode != false)
         {
             loadImageButton?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
         }

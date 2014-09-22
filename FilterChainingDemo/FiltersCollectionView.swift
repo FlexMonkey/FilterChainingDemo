@@ -60,19 +60,12 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         }
     }
     
-    var indexPath : NSIndexPath?
+    var selectedFilter : UserDefinedFilter?
     {
         didSet
         {
             sendActionsForControlEvents(.ValueChanged)
-        }
-    }
-    
-    var selectedFilter : UserDefinedFilter!
-    {
-        get
-        {
-            return userDefinedFilters[indexPath!.item]
+            refresh()
         }
     }
     
@@ -83,7 +76,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        self.indexPath = indexPath
+        selectedFilter = userDefinedFilters[indexPath.item]
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
@@ -91,6 +84,15 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FiltersCollectionViewCell
     
         cell.userDefinedFilter = userDefinedFilters[indexPath.item]
+        
+        if let foo = selectedFilter
+        {
+            cell.selected = cell.userDefinedFilter == foo
+        }
+        else
+        {
+            cell.selected = false
+        }
         
         return cell
     }

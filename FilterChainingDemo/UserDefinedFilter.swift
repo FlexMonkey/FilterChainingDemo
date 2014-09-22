@@ -19,7 +19,7 @@ class UserDefinedFilter
     var isImageOutputNode: Bool = false
     
     var inputImage: UIImage?
-    
+  
     init(isImageInputNode: Bool, isImageOutputNode: Bool)
     {
         self.isImageInputNode = isImageInputNode
@@ -50,7 +50,13 @@ class UserDefinedFilter
             values?.append(filterParameter.defaultValue)
         }
     }
+    
+    class func getEmptyUserDefinedFilter() -> UserDefinedFilter
+    {
+        return UserDefinedFilter(isImageInputNode: false, isImageOutputNode: false)
+    }
 }
+
 
     func == (left: UserDefinedFilter, right: UserDefinedFilter) -> Bool
     {

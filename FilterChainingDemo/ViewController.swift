@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UIToolbarDelegate
 {
-    var userDefinedFilters: [UserDefinedFilter]!
-    
     let filtersCollectionView = FiltersCollectionView(frame: CGRectZero)
     let filterParameterEditor = FilterParameterEditor(frame: CGRectZero)
     let imagePreview = ImagePreview(frame: CGRectZero)
@@ -73,47 +71,65 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         selectedFilter = userDefinedFilters[0]
         
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
     }
 
-    var selectedFilter: UserDefinedFilter?
+    var userDefinedFilters: [UserDefinedFilter] = [UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false)]
     {
         didSet
         {
-            if selectedFilter == nil
-            {
-                selectedFilter = userDefinedFilters[0]
-            }
+            filtersCollectionView.userDefinedFilters = userDefinedFilters
             
-            filterParameterEditor.userDefinedFilter = selectedFilter
-   
-            if let userDefinedFilterConst = selectedFilter
+            filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
+        }
+    }
+    
+    var selectedFilter: UserDefinedFilter = UserDefinedFilter(isImageInputNode: false, isImageOutputNode: false)
+    {
+        didSet
+        {
+            if let foo = filterParameterEditor.selectedFilter
             {
-                deleteFilterButton.enabled = !userDefinedFilterConst.isImageInputNode && !userDefinedFilterConst.isImageOutputNode
+                if !(foo == selectedFilter)
+                {
+                    filterParameterEditor.selectedFilter = selectedFilter
+                }
             }
             else
             {
-                deleteFilterButton.enabled = false
+                filterParameterEditor.selectedFilter = selectedFilter
             }
+            
+            if let foo = filtersCollectionView.selectedFilter
+            {
+                if !(foo == selectedFilter)
+                {
+                    filtersCollectionView.selectedFilter = selectedFilter
+                }
+            }
+            else
+            {
+                filtersCollectionView.selectedFilter = selectedFilter
+            }
+            
+            deleteFilterButton.enabled = !selectedFilter.isImageInputNode && !selectedFilter.isImageOutputNode
         }
     }
     
     func deleteSelectedFilter(value: UIBarButtonItem)
     {
-        userDefinedFilters = userDefinedFilters.filter({!($0 == self.selectedFilter!)})
-        
-        filtersCollectionView.userDefinedFilters = userDefinedFilters
-        
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
+        userDefinedFilters = userDefinedFilters.filter({!($0 == self.selectedFilter)})
+
+        selectedFilter = userDefinedFilters[0]
     }
     
     func addNewFilter(value: UIBarButtonItem)
     {
-        userDefinedFilters.insert(UserDefinedFilter(filter: Filters.filters[0]), atIndex: userDefinedFilters.count - 1)
-  
-        filtersCollectionView.userDefinedFilters = userDefinedFilters
+        let newFilter = UserDefinedFilter(filter: Filters.filters[0])
         
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
+        selectedFilter = newFilter
+        
+        userDefinedFilters.insert(newFilter, atIndex: userDefinedFilters.count - 1)
     }
     
     func imagesDidChange(images: FilteredImages)
@@ -125,14 +141,12 @@ class ViewController: UIViewController, UIToolbarDelegate
     {
         filtersCollectionView.refresh()
         
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
     }
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
-        selectedFilter = value.selectedFilter
-        
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter!, imagesDidChange)
+        selectedFilter = value.selectedFilter!
     }
     
     override func viewDidLayoutSubviews()
