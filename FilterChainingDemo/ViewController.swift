@@ -118,9 +118,11 @@ class ViewController: UIViewController, UIToolbarDelegate
     
     func deleteSelectedFilter(value: UIBarButtonItem)
     {
-        userDefinedFilters = userDefinedFilters.filter({!($0 == self.selectedFilter)})
+        let previousFilter = selectedFilter
 
         selectedFilter = userDefinedFilters[0]
+        
+        userDefinedFilters = userDefinedFilters.filter({!($0 == previousFilter)})
     }
     
     func addNewFilter(value: UIBarButtonItem)
