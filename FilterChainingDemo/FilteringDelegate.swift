@@ -16,6 +16,7 @@ class FilteringDelegate
     var filteredImages: FilteredImages!
     var filtersRuning: Bool = false;
     var changePending: Bool = false;
+    var backgroundBlock : Async?
     
     private var callbackFunction: ((FilteredImages) -> (Void))!
     
@@ -24,27 +25,35 @@ class FilteringDelegate
         self.controller = controller
     }
 
+    func killBackgroundFiltering()
+    {
+        backgroundBlock?.cancel()
+        backgroundBlock = nil
+        
+        filtersRuning = false
+    }
+
     func applyFilters(userDefinedFilters: [UserDefinedFilter], selectedUserDefinedFilter: UserDefinedFilter, callbackFunction : ((FilteredImages) -> (Void)) )
     {
         if !self.filtersRuning
         {
-            Async.background
+            backgroundBlock = Async.background
+            {
+                self.filtersRuning = true
+                self.callbackFunction = callbackFunction
+                self.filteredImages = FilteringDelegate.applyFilterAsync(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, context: self.ciContext)
+                
+            }
+            .main
+            {
+                self.filtersRuning = false
+                self.callbackFunction(self.filteredImages)
+                
+                if self.changePending
                 {
-                    self.filtersRuning = true
-                    self.callbackFunction = callbackFunction
-                    self.filteredImages = FilteringDelegate.applyFilterAsync(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, context: self.ciContext)
-                    
+                    self.changePending = false
+                    self.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, callbackFunction: callbackFunction)
                 }
-                .main
-                {
-                    self.filtersRuning = false
-                    self.callbackFunction(self.filteredImages)
-                    
-                    if self.changePending
-                    {
-                        self.changePending = false
-                        self.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedUserDefinedFilter, callbackFunction: callbackFunction)
-                    }
             }
         }
         else
