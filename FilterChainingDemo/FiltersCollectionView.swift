@@ -56,7 +56,34 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     {
         didSet
         {
-           refresh()
+            if oldValue.count < userDefinedFilters.count && oldValue.count != 0
+            {
+                println("** INSERTING OBJECT")
+                
+                let insertIndexPath = NSIndexPath(forItem: oldValue.count - 1, inSection: 0)
+              
+                uiCollectionView.insertItemsAtIndexPaths([insertIndexPath])
+                
+                let scrollToIndexPath = NSIndexPath(forItem: userDefinedFilters.count - 1, inSection: 0)
+                
+                uiCollectionView.selectItemAtIndexPath(scrollToIndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredHorizontally)
+            }
+            else if oldValue.count > userDefinedFilters.count
+            {
+                println("** Deleting object")
+                
+                let deleteIndexPath = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath // NSIndexPath(forItem: 1, inSection: 0)
+                
+                uiCollectionView.deleteItemsAtIndexPaths([deleteIndexPath])
+                
+                let scrollToIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                
+                uiCollectionView.selectItemAtIndexPath(scrollToIndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.Left)
+            }
+            else
+            {
+                //refresh()
+            }
         }
     }
     
@@ -64,6 +91,24 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     {
         didSet
         {
+            // uiCollectionView.selectItemAtIndexPath for selected item!!!
+            
+            var selectedIndex : Int = -1
+            
+            for (i: Int, filter: UserDefinedFilter) in enumerate(userDefinedFilters)
+            {
+                if filter == selectedFilter!
+                {
+                    selectedIndex = i
+                }
+            }
+            
+            if selectedIndex != -1
+            {
+                let scrollToIndexPath = NSIndexPath(forItem: selectedIndex, inSection: 0)
+                uiCollectionView.selectItemAtIndexPath(scrollToIndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredHorizontally)
+            }
+            
             sendActionsForControlEvents(.ValueChanged)
             refresh()
         }

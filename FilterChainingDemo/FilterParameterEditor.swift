@@ -38,8 +38,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                 
                 if loadImageButton != nil
                 {
-                    loadImageButton?.removeFromSuperview()
-                    loadImageButton = nil
+                    UIView.animateWithDuration(fadeAnimationDuration, animations: {self.loadImageButton!.alpha = 0}, completion: removeLoadImageButton)
                 }
                 
                 UIView.animateWithDuration(fadeAnimationDuration, animations: {self.filterPicker.alpha = 1}, completion: setFilterPickerItem)
@@ -56,15 +55,16 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                     loadImageButton!.setTitleColor(UIColor.blueColor(), forState: .Normal)
                     loadImageButton!.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
                     loadImageButton!.addTarget(self, action: "loadImageClickedSelector:", forControlEvents: .TouchUpInside)
+                    loadImageButton?.alpha = 0
                     
                     addSubview(loadImageButton!)
+                    UIView.animateWithDuration(fadeAnimationDuration, animations: {self.loadImageButton!.alpha = 1})
                 }
                 else if selectedFilter.isImageOutputNode
                 {
                     if loadImageButton != nil
                     {
-                        loadImageButton?.removeFromSuperview()
-                        loadImageButton = nil
+                        UIView.animateWithDuration(fadeAnimationDuration, animations: {self.loadImageButton!.alpha = 0}, completion: removeLoadImageButton)
                     }
                 }
             }
@@ -83,6 +83,12 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                 }
             }
         }
+    }
+    
+    func removeLoadImageButton(value : Bool)
+    {
+        loadImageButton?.removeFromSuperview()
+        loadImageButton = nil
     }
     
     private var numDials : Int = 0
