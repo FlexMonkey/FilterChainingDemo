@@ -96,9 +96,7 @@ class ViewController: UIViewController, UIToolbarDelegate
             addControlEventActions()
             
             filteringDelegate.killBackgroundFiltering()
-            
-            println("userDefinedFilters \(userDefinedFilters.count)")
-            
+      
             filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
         }
     }
@@ -125,9 +123,9 @@ class ViewController: UIViewController, UIToolbarDelegate
     {
         let previousFilter = selectedFilter
 
-        selectedFilter = userDefinedFilters[0]
-        
         userDefinedFilters = userDefinedFilters.filter({!($0 == previousFilter)})
+
+        selectedFilter = userDefinedFilters[0]
     }
     
     func addNewFilter(value: UIBarButtonItem)
@@ -149,9 +147,7 @@ class ViewController: UIViewController, UIToolbarDelegate
     func filterParameterEditorChangeHandler(value : FilterParameterEditor)
     {
         filtersCollectionView.refresh()
-        
-        println("apply filters \(userDefinedFilters.count)")
-        
+
         filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
     }
     
