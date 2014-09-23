@@ -11,6 +11,9 @@ import UIKit
 
 class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
+    let fadeAnimationDuration = 0.3
+    
+    var fadedOutDials = [NumericDial]()
     var numericDials = [NumericDial]()
     let filterPicker = UIPickerView(frame: CGRectZero)
     var loadImageButton: UIButton?
@@ -32,7 +35,6 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
             if let filterConst = selectedFilter.filter
             {
                 numDials = filterConst.parameterCount
-                filterPicker.alpha = 1
                 
                 if loadImageButton != nil
                 {
@@ -40,18 +42,12 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                     loadImageButton = nil
                 }
                 
-                for (index, filter) in enumerate(Filters.filters)
-                {
-                    if filter.filterName == filterConst.filterName
-                    {
-                        filterPicker.selectRow(index, inComponent: 0, animated: true)
-                    }
-                }
+                UIView.animateWithDuration(fadeAnimationDuration, animations: {self.filterPicker.alpha = 1}, completion: setFilterPickerItem)
             }
             else
             {
                 numDials = 0
-                filterPicker.alpha = 0
+                UIView.animateWithDuration(fadeAnimationDuration, animations: {self.filterPicker.alpha = 0})
                 
                 if selectedFilter.isImageInputNode
                 {
@@ -75,6 +71,20 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
+    func setFilterPickerItem(value: Bool)
+    {
+        if let filterConst = selectedFilter.filter
+        {
+            for (index, filter) in enumerate(Filters.filters)
+            {
+                if filter.filterName == filterConst.filterName
+                {
+                    filterPicker.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+        }
+    }
+    
     private var numDials : Int = 0
     {
         didSet
@@ -90,11 +100,15 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     
     func createDials()
     {
+        fadedOutDials = [NumericDial]()
+        
         for dial in numericDials
         {
             dial.removeTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
             
-            dial.removeFromSuperview()
+            fadedOutDials.append(dial)
+            
+            UIView.animateWithDuration(fadeAnimationDuration, animations: {dial.alpha = 0}, completion: dialFadeOutComplete)
         }
         
         numericDials = [NumericDial]()
@@ -109,17 +123,28 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
                     
                     dial.currentValue = udf.values![i]
                     dial.title = udfFilter.filterParameters[i].parameterName
+                    dial.alpha = 0;
                     
                     dial.addTarget(self, action: "dialChangeHandler:", forControlEvents: .ValueChanged)
                     
                     numericDials.append(dial)
                     
                     addSubview(dial)
+
+                    UIView.animateWithDuration(fadeAnimationDuration, animations: {dial.alpha = 1})
                 }
             }
         }
         
         setNeedsLayout()
+    }
+    
+    func dialFadeOutComplete(value: Bool)
+    {
+        for dial in fadedOutDials
+        {
+            dial.removeFromSuperview()
+        }
     }
     
     func loadImageClickedSelector(button: UIButton)
