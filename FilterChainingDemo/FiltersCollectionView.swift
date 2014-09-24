@@ -64,9 +64,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
               
                 uiCollectionView.insertItemsAtIndexPaths([insertIndexPath])
                 
-                let scrollToIndexPath = NSIndexPath(forItem: userDefinedFilters.count - 2, inSection: 0)
-                
-                uiCollectionView.selectItemAtIndexPath(scrollToIndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredHorizontally)
+                selectedFilter = userDefinedFilters[userDefinedFilters.count - 2]
             }
             else if oldValue.count > userDefinedFilters.count
             {
@@ -75,10 +73,8 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
                 let deleteIndexPath = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
                 
                 uiCollectionView.deleteItemsAtIndexPaths([deleteIndexPath])
-                
-                let scrollToIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-                
-                uiCollectionView.selectItemAtIndexPath(scrollToIndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.Left)
+              
+                selectedFilter = userDefinedFilters[0]
             }
             else
             {
