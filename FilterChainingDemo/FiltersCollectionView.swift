@@ -158,7 +158,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
 
 extension UIControlEvents
 {
-    static let SelectedFilterChanged: UIControlEvents = UIControlEvents(UIControlEvents.ApplicationReserved.toRaw() << 1)
+    static let SelectedFilterChanged: UIControlEvents = UIControlEvents(0x00000001 << 24)
 }
 
 
