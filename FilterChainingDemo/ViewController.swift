@@ -21,8 +21,13 @@ class ViewController: UIViewController, UIToolbarDelegate
     
     let filteringDelegate: FilteringDelegate!
     
+    let startNode = UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false)
+    let endNode = UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)
+    
     override init()
     {
+        selectedFilter = startNode
+        
         super.init()
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
@@ -30,10 +35,13 @@ class ViewController: UIViewController, UIToolbarDelegate
         filteringDelegate = FilteringDelegate(controller: self)
         
         filterParameterEditor.viewController = self
+
     }
 
     required init(coder aDecoder: NSCoder)
     {
+        selectedFilter = startNode
+        
         super.init(coder: aDecoder)
         
         addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
@@ -48,16 +56,17 @@ class ViewController: UIViewController, UIToolbarDelegate
         super.viewDidLoad()
        
         userDefinedFilters = [
-            UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false),
+            startNode,
             UserDefinedFilter(filter: Filters.filters[0]),
             UserDefinedFilter(filter: Filters.filters[1]),
-            UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)]
+            endNode]
         
         userDefinedFilters[0].inputImage = UIImage(named: "grand_canyon.jpg")
         
         filtersCollectionView.userDefinedFilters = userDefinedFilters
         
         addControlEventActions()
+        filtersCollectionView.addTarget(self, action: "filtersCollectionViewSelectedFilterChange:", forControlEvents: .SelectedFilterChanged)
 
         toolbar.setItems([addNewFilterButton!, deleteFilterButton!], animated: true)
         deleteFilterButton.enabled = false
@@ -101,7 +110,7 @@ class ViewController: UIViewController, UIToolbarDelegate
         }
     }
     
-    var selectedFilter: UserDefinedFilter = UserDefinedFilter(isImageInputNode: false, isImageOutputNode: false)
+    var selectedFilter: UserDefinedFilter
     {
         didSet
         {
@@ -124,19 +133,20 @@ class ViewController: UIViewController, UIToolbarDelegate
         let previousFilter = selectedFilter
 
         userDefinedFilters = userDefinedFilters.filter({!($0 == previousFilter)})
-
-        selectedFilter = userDefinedFilters[0]
     }
     
     func addNewFilter(value: UIBarButtonItem)
     {
         let newFilter = UserDefinedFilter(filter: Filters.filters[0])
         
-        selectedFilter = newFilter
-        
         userDefinedFilters.insert(newFilter, atIndex: userDefinedFilters.count - 1)
         
         filtersCollectionView.userDefinedFilters = userDefinedFilters
+    }
+    
+    func filtersCollectionViewSelectedFilterChange(value: FiltersCollectionView)
+    {
+        selectedFilter = value.selectedFilter!
     }
     
     func imagesDidChange(images: FilteredImages)
@@ -153,6 +163,8 @@ class ViewController: UIViewController, UIToolbarDelegate
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
+        println("\(value.selectedFilter?.uuid)  -- \(selectedFilter.uuid)")
+        
         selectedFilter = value.selectedFilter!
     }
     

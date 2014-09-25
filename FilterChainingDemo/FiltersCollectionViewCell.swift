@@ -16,7 +16,6 @@ class FiltersCollectionViewCell: UICollectionViewCell
     {
         super.init(frame: frame)
             
-        
         label = UILabel(frame: CGRectZero)
         label.numberOfLines = 0
         label.frame = bounds.rectByInsetting(dx: 0, dy: 0)

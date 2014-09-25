@@ -65,6 +65,8 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
                 uiCollectionView.insertItemsAtIndexPaths([insertIndexPath])
                 
                 selectedFilter = userDefinedFilters[userDefinedFilters.count - 2]
+                
+                sendActionsForControlEvents(.SelectedFilterChanged)
             }
             else if oldValue.count > userDefinedFilters.count
             {
@@ -75,6 +77,8 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
                 uiCollectionView.deleteItemsAtIndexPaths([deleteIndexPath])
               
                 selectedFilter = userDefinedFilters[0]
+                
+                sendActionsForControlEvents(.SelectedFilterChanged)
             }
             else
             {
@@ -148,4 +152,25 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
         super.init(coder: aDecoder)
     }
 
+    
 }
+
+
+extension UIControlEvents
+{
+    static var SelectedFilterChanged: UIControlEvents
+    {
+        get
+        {
+            return FiltersCollectionViewEvents.SelectedFilterChangedEvent
+        }
+    }
+}
+
+
+struct FiltersCollectionViewEvents
+{
+    static let SelectedFilterChangedEvent: UIControlEvents = UIControlEvents(UIControlEvents.ApplicationReserved.toRaw() << 1)
+}
+
+
