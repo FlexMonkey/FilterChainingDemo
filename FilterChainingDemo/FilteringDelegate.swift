@@ -92,7 +92,9 @@ class FilteringDelegate
                         
                         if let valueFunction = userDefinedFilter.filter?.getValue
                         {
-                            ciFilter.setValue(valueFunction(index, paramValue), forKey: parameter.ciParameterName)
+                            ciFilter.setValue(valueFunction(parameterIndex, paramValue), forKey: parameter.ciParameterName)
+                            
+                            println("get value \(valueFunction(parameterIndex, paramValue)) -- \(parameter.ciParameterName)")
                         }
                         else
                         {

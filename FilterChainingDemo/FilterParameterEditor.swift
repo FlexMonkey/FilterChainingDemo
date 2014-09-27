@@ -228,11 +228,11 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
         }
         else
         {
-            let startX = Int(frame.size.width) - numericDials.count * 160
+            let startX = Int(frame.size.width) - numericDials.count * 150
             
             for (index : Int, dial : NumericDial) in enumerate(numericDials)
             {
-                dial.frame = CGRect(x: startX + index * 160, y: 10, width: 150, height: 150)
+                dial.frame = CGRect(x: startX + index * 150, y: 10, width: 150, height: 150)
             }
             
             filterPicker.frame = CGRect(x: 10, y: 10, width: 225, height: frame.size.height - 20)
