@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Filters
 {
@@ -47,13 +48,38 @@ struct Filters
             ciFilterName: "CISharpenLuminance",
             filterParameters: [FilterParameter(parameterName: "Sharpness", ciParameterName: "inputSharpness", defaultValue: 0.5, multiplier: 2)]),
         
+        Filter(filterName: "Tone Curve",
+            ciFilterName: "CIToneCurve",
+            filterParameters: [
+                FilterParameter(parameterName: "One", ciParameterName: "inputPoint0", defaultValue: 0.0, multiplier: 1),
+                FilterParameter(parameterName: "Two", ciParameterName: "inputPoint1", defaultValue: 0.25, multiplier: 1),
+                FilterParameter(parameterName: "Three", ciParameterName: "inputPoint2", defaultValue: 0.5, multiplier: 1),
+                FilterParameter(parameterName: "Four", ciParameterName: "inputPoint3", defaultValue: 0.75, multiplier: 1),
+                FilterParameter(parameterName: "Five", ciParameterName: "inputPoint4", defaultValue: 1.0, multiplier: 1)],
+            getValue:
+            {
+                (index: Int, paramValue: Double) -> AnyObject in
+                
+                let toneCurveX = [0.0, 0.25, 0.5, 0.75, 1.0][index]
+                let toneCurvePoint = CIVector(x: CGFloat(toneCurveX), y: CGFloat(paramValue))
+                
+                return toneCurvePoint
+            }
+        ),
+        
+
+        
         Filter(filterName: "Unsharp Mask",
             ciFilterName: "CIUnsharpMask",
             filterParameters: [
                 FilterParameter(parameterName: "Radius", ciParameterName: "inputRadius", defaultValue: 0.25, multiplier: 20),
                 FilterParameter(parameterName: "Intensity", ciParameterName: "inputIntensity", defaultValue: 0.5, multiplier: 2)]),
     ]
+
+
+
 }
+
 
 struct FilterParameter
 {

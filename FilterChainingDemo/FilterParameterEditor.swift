@@ -192,7 +192,8 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString?
     {
-        return NSAttributedString(string: Filters.filters[row].filterName, attributes: [NSForegroundColorAttributeName : UIColor.blueColor()])
+        return NSAttributedString(string: Filters.filters[row].filterName,
+            attributes: [NSForegroundColorAttributeName : UIColor.blueColor()])
     }
     
     func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)

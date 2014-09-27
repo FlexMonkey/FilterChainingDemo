@@ -16,12 +16,14 @@ class Filter
     let filterName: String
     let filterParameters : [FilterParameter]
     let ciFilterName: String
+    let getValue: ((Int, Double) -> (AnyObject))?
     
-    init(filterName: String, ciFilterName: String, filterParameters : [FilterParameter])
+    init(filterName: String, ciFilterName: String, filterParameters: [FilterParameter], getValue: ((Int, Double) -> (AnyObject))? = nil)
     {
         self.filterName = filterName
         self.ciFilterName = ciFilterName
         self.filterParameters = filterParameters
+        self.getValue = getValue
         
         ciFilter = CIFilter(name: ciFilterName)
     }

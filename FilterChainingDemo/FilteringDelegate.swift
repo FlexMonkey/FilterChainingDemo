@@ -90,7 +90,14 @@ class FilteringDelegate
                     {
                         let paramValue = userDefinedFilter.values![parameterIndex] * Double(parameter.multiplier)
                         
-                        ciFilter.setValue(paramValue, forKey: parameter.ciParameterName)
+                        if let valueFunction = userDefinedFilter.filter?.getValue
+                        {
+                            ciFilter.setValue(valueFunction(index, paramValue), forKey: parameter.ciParameterName)
+                        }
+                        else
+                        {
+                            ciFilter.setValue(paramValue, forKey: parameter.ciParameterName)
+                        }
                     }
                     
                     let filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as CIImage
