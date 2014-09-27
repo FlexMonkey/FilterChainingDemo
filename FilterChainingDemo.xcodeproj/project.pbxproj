@@ -11,6 +11,9 @@
 		3E38F31D19C9651800B86916 /* NumericDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F31B19C9651800B86916 /* NumericDial.swift */; };
 		3E38F31E19C9651800B86916 /* NumericDialTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F31C19C9651800B86916 /* NumericDialTrack.swift */; };
 		3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38F32019C96A3D00B86916 /* ImagePreview.swift */; };
+		3ED7199919D694CC00388328 /* ToneCurveEditorCurveLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED7199719D694CC00388328 /* ToneCurveEditorCurveLayer.swift */; };
+		3ED7199A19D694CC00388328 /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED7199819D694CC00388328 /* UIBezierPathExtension.swift */; };
+		3ED7199C19D7098B00388328 /* WidgetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED7199B19D7098B00388328 /* WidgetProtocol.swift */; };
 		3EF2798A19CAB315003C412E /* UserDefinedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2798919CAB315003C412E /* UserDefinedFilter.swift */; };
 		3EF2798C19CAB353003C412E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2798B19CAB353003C412E /* Filter.swift */; };
 		BE0F4A4919CE97330043A0A1 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */; };
@@ -44,6 +47,9 @@
 		3E38F31B19C9651800B86916 /* NumericDial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericDial.swift; sourceTree = "<group>"; };
 		3E38F31C19C9651800B86916 /* NumericDialTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericDialTrack.swift; sourceTree = "<group>"; };
 		3E38F32019C96A3D00B86916 /* ImagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
+		3ED7199719D694CC00388328 /* ToneCurveEditorCurveLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCurveEditorCurveLayer.swift; sourceTree = "<group>"; };
+		3ED7199819D694CC00388328 /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
+		3ED7199B19D7098B00388328 /* WidgetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetProtocol.swift; sourceTree = "<group>"; };
 		3EF2798919CAB315003C412E /* UserDefinedFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedFilter.swift; sourceTree = "<group>"; };
 		3EF2798B19CAB353003C412E /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -109,6 +115,15 @@
 			name = imagePreview;
 			sourceTree = "<group>";
 		};
+		3ED7199619D6948500388328 /* widgets */ = {
+			isa = PBXGroup;
+			children = (
+				3ED7199719D694CC00388328 /* ToneCurveEditorCurveLayer.swift */,
+				3ED7199B19D7098B00388328 /* WidgetProtocol.swift */,
+			);
+			name = widgets;
+			sourceTree = "<group>";
+		};
 		3EF2798819CAB2EA003C412E /* valueObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +138,7 @@
 		BE0F4A4719CE970E0043A0A1 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3ED7199819D694CC00388328 /* UIBezierPathExtension.swift */,
 				BE0F4A4819CE97330043A0A1 /* UIImageExtension.swift */,
 			);
 			name = extensions;
@@ -165,6 +181,7 @@
 		BEB19D2A19C8CAA500191C16 /* FilterChainingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3ED7199619D6948500388328 /* widgets */,
 				BE0F4A5219CF67790043A0A1 /* grand_canyon.jpg */,
 				BE0F4A4F19CEF0880043A0A1 /* async */,
 				BE0F4A4C19CEA3C40043A0A1 /* delegates */,
@@ -325,14 +342,17 @@
 				3E38F31E19C9651800B86916 /* NumericDialTrack.swift in Sources */,
 				3E38F32119C96A3D00B86916 /* ImagePreview.swift in Sources */,
 				BEB19D5319CD4C4800191C16 /* Filters.swift in Sources */,
+				3ED7199A19D694CC00388328 /* UIBezierPathExtension.swift in Sources */,
 				BEB19D2E19C8CAA500191C16 /* AppDelegate.swift in Sources */,
 				BEB19D5119C8D41400191C16 /* FiltersCollectionView.swift in Sources */,
 				BE0F4A4E19CEA3DD0043A0A1 /* FilteredImages.swift in Sources */,
 				3EF2798A19CAB315003C412E /* UserDefinedFilter.swift in Sources */,
+				3ED7199C19D7098B00388328 /* WidgetProtocol.swift in Sources */,
 				3E38F31D19C9651800B86916 /* NumericDial.swift in Sources */,
 				BEB19D4F19C8CF6C00191C16 /* FiltersCollectionViewCell.swift in Sources */,
 				3E38F31919C9635A00B86916 /* FilterParameterEditor.swift in Sources */,
 				BE0F4A5119CEF09D0043A0A1 /* Async.swift in Sources */,
+				3ED7199919D694CC00388328 /* ToneCurveEditorCurveLayer.swift in Sources */,
 				BE0F4A4919CE97330043A0A1 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

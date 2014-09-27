@@ -17,13 +17,18 @@ class Filter
     let filterParameters : [FilterParameter]
     let ciFilterName: String
     let getValue: ((Int, Double) -> (AnyObject))?
+    let overlayWidget: WidgetLayer?
     
-    init(filterName: String, ciFilterName: String, filterParameters: [FilterParameter], getValue: ((Int, Double) -> (AnyObject))? = nil)
+    init(filterName: String, ciFilterName: String,
+        filterParameters: [FilterParameter],
+        getValue: ((Int, Double) -> (AnyObject))? = nil,
+        overlayWidget: WidgetLayer? = nil)
     {
         self.filterName = filterName
         self.ciFilterName = ciFilterName
         self.filterParameters = filterParameters
         self.getValue = getValue
+        self.overlayWidget = overlayWidget
         
         ciFilter = CIFilter(name: ciFilterName)
     }

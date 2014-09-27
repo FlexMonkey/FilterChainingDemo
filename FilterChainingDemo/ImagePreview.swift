@@ -12,6 +12,7 @@ class ImagePreview: UIControl
 {
     let imagePreviewSelected = UIImageView(frame: CGRectZero)
     let imagePreviewFinal = UIImageView(frame: CGRectZero)
+    var overlayWidget : WidgetLayer?
     
     override init(frame: CGRect)
     {
@@ -37,6 +38,29 @@ class ImagePreview: UIControl
         super.init(coder: aDecoder)
     }
     
+    var selectedFilter : UserDefinedFilter! // if this filter has an overlay widget, add it above current image
+    {
+        didSet
+        {
+            if let widget = selectedFilter.filter?.overlayWidget
+            {
+                if overlayWidget != widget
+                {
+                    overlayWidget = widget
+                    layer.addSublayer(widget)
+                }
+                    
+                overlayWidget?.selectedFilter = selectedFilter
+                widget.setNeedsDisplay()
+            }
+            else if let widget = overlayWidget
+            {
+                overlayWidget?.removeFromSuperlayer()
+                overlayWidget = nil
+            }
+        }
+    }
+    
     var filteredImages: FilteredImages!
     {
         didSet
@@ -49,6 +73,14 @@ class ImagePreview: UIControl
     
     override func layoutSubviews()
     {
+        if let widget = overlayWidget
+        {
+            let widgetSide = min(Int(frame.size.width), Int(frame.size.height))
+            let halfWidgetSide = widgetSide / 2
+            
+            widget.frame = CGRect(x: Int(frame.size.width) / 4 - halfWidgetSide, y: Int(frame.size.height) / 2 - halfWidgetSide, width: widgetSide, height: widgetSide)
+        }
+        
         if UIApplication.sharedApplication().statusBarOrientation.isPortrait
         {
             let widgetWidth = Int(frame.size.width)

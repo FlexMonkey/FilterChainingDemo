@@ -118,6 +118,7 @@ class ViewController: UIViewController, UIToolbarDelegate
             
             filterParameterEditor.selectedFilter = selectedFilter
             filtersCollectionView.selectedFilter = selectedFilter
+            imagePreview.selectedFilter = selectedFilter
             
             addControlEventActions()
             
@@ -157,14 +158,12 @@ class ViewController: UIViewController, UIToolbarDelegate
     func filterParameterEditorChangeHandler(value : FilterParameterEditor)
     {
         filtersCollectionView.refresh()
-
+        imagePreview.selectedFilter = selectedFilter // to do
         filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
     }
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)
     {
-        println("\(value.selectedFilter?.uuid)  -- \(selectedFilter.uuid)")
-        
         selectedFilter = value.selectedFilter!
     }
     

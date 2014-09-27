@@ -64,7 +64,8 @@ struct Filters
                 let toneCurvePoint = CIVector(x: CGFloat(toneCurveX), y: CGFloat(paramValue))
                 
                 return toneCurvePoint
-            }
+            },
+            overlayWidget: ToneCurveEditorCurveLayer()
         ),
         
 
