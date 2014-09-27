@@ -35,9 +35,13 @@ class ViewController: UIViewController, UIToolbarDelegate
         filteringDelegate = FilteringDelegate(controller: self)
         
         filterParameterEditor.viewController = self
-
     }
 
+    override func supportedInterfaceOrientations() -> Int
+    {
+        return Int(UIInterfaceOrientationMask.Landscape.toRaw())
+    }
+    
     required init(coder aDecoder: NSCoder)
     {
         selectedFilter = startNode
@@ -166,6 +170,8 @@ class ViewController: UIViewController, UIToolbarDelegate
     {
         selectedFilter = value.selectedFilter!
     }
+    
+
     
     override func viewDidLayoutSubviews()
     {
