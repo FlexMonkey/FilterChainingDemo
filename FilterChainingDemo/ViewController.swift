@@ -39,7 +39,7 @@ class ViewController: UIViewController, UIToolbarDelegate
 
     override func supportedInterfaceOrientations() -> Int
     {
-        return Int(UIInterfaceOrientationMask.Landscape.toRaw())
+        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
     }
     
     required init(coder aDecoder: NSCoder)
