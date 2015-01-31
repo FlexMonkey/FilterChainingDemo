@@ -11,7 +11,7 @@ import UIKit
 
 class UserDefinedFilter
 {
-    let uuid = NSUUID.UUID().UUIDString
+    let uuid = NSUUID()
     
     var values: [Double]?
     
