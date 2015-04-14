@@ -40,7 +40,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     {
         if uiCollectionView.indexPathsForSelectedItems().count > 0
         {
-            let indexPathsForSelectedItem = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
+            let indexPathsForSelectedItem = uiCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
         
             uiCollectionView.reloadData()
         
@@ -72,7 +72,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
             {
                 // deleting filter
                 
-                let deleteIndexPath = uiCollectionView.indexPathsForSelectedItems()[0] as NSIndexPath
+                let deleteIndexPath = uiCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
                 
                 uiCollectionView.deleteItemsAtIndexPaths([deleteIndexPath])
               
@@ -124,7 +124,7 @@ class FiltersCollectionView: UIControl, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FiltersCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! FiltersCollectionViewCell
     
         cell.userDefinedFilter = userDefinedFilters[indexPath.item]
         

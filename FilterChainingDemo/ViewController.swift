@@ -16,27 +16,14 @@ class ViewController: UIViewController, UIToolbarDelegate
  
     let toolbar = UIToolbar(frame: CGRectZero)
     
-    let addNewFilterButton: UIBarButtonItem!
-    let deleteFilterButton: UIBarButtonItem!
+    var addNewFilterButton: UIBarButtonItem!
+    var deleteFilterButton: UIBarButtonItem!
     
-    let filteringDelegate: FilteringDelegate!
+    var filteringDelegate: FilteringDelegate!
     
     let startNode = UserDefinedFilter(isImageInputNode: true, isImageOutputNode: false)
     let endNode = UserDefinedFilter(isImageInputNode: false, isImageOutputNode: true)
-    
-    override init()
-    {
-        selectedFilter = startNode
-        
-        super.init()
-        
-        addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
-        deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
-        filteringDelegate = FilteringDelegate(controller: self)
-        
-        filterParameterEditor.viewController = self
-    }
-
+  
     override func supportedInterfaceOrientations() -> Int
     {
         return Int(UIInterfaceOrientationMask.Landscape.rawValue)
@@ -48,8 +35,8 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         super.init(coder: aDecoder)
         
-        addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "addNewFilter:")
-        deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Bordered, target: self, action: "deleteSelectedFilter:")
+        addNewFilterButton = UIBarButtonItem(title: "Add New Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewFilter:")
+        deleteFilterButton = UIBarButtonItem(title: "Delete Selected Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteSelectedFilter:")
         filteringDelegate = FilteringDelegate(controller: self)
         
         filterParameterEditor.viewController = self
@@ -83,7 +70,7 @@ class ViewController: UIViewController, UIToolbarDelegate
         
         selectedFilter = userDefinedFilters[0]
         
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, callbackFunction: imagesDidChange)
     }
 
     func addControlEventActions()
@@ -110,7 +97,7 @@ class ViewController: UIViewController, UIToolbarDelegate
             
             filteringDelegate.killBackgroundFiltering()
       
-            filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
+            filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, callbackFunction: imagesDidChange)
         }
     }
     
@@ -129,7 +116,7 @@ class ViewController: UIViewController, UIToolbarDelegate
             deleteFilterButton.enabled = !selectedFilter.isImageInputNode && !selectedFilter.isImageOutputNode
             
             filteringDelegate.killBackgroundFiltering()
-            filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
+            filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, callbackFunction: imagesDidChange)
         }
     }
     
@@ -163,7 +150,7 @@ class ViewController: UIViewController, UIToolbarDelegate
     {
         filtersCollectionView.refresh()
         imagePreview.selectedFilter = selectedFilter // to do
-        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, imagesDidChange)
+        filteringDelegate.applyFilters(userDefinedFilters, selectedUserDefinedFilter: selectedFilter, callbackFunction: imagesDidChange)
     }
     
     func filtersCollectionViewChangeHandler(value: FiltersCollectionView)

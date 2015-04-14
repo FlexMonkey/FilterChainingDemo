@@ -196,7 +196,7 @@ class FilterParameterEditor: UIControl, UIPickerViewDataSource, UIPickerViewDele
             attributes: [NSForegroundColorAttributeName : UIColor.blueColor()])
     }
     
-    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         selectedFilter.filter = Filters.filters[row]
         numDials = selectedFilter.filter!.parameterCount

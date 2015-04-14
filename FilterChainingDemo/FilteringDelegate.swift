@@ -102,7 +102,7 @@ class FilteringDelegate
                         }
                     }
                     
-                    let filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as CIImage
+                    let filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as! CIImage
                     
                     inputImage = filteredImageData
 
